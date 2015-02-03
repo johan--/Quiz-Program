@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+
+
+  match ':controller(/:action)' , :via => :get 
+
+  resources :instructors
+
+  resources :students
+
+  resources :users
+
+
+
+
+  get 'users/login'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
