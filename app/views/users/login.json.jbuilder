@@ -1,5 +1,8 @@
 
+json.user do
+	json.extract! @student1, :name , :personal_image
+end
 
 
-
-json.message I18n.t('message')
+json.message('condition')	
+json.condition ("safsafasgasasg")

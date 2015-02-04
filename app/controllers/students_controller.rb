@@ -4,8 +4,42 @@ class StudentsController < UsersController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
-    
+    # @students = Student.all
+        #password = "passIns1"
+  #email = "cherifSalama@gmail.com"
+  #logindata=params
+  email = params[:gg]
+  password = params[:hh]
+
+
+    #email = logindata[:email]
+    #password= logindata[:password]
+    #puts logindata
+    # JSON to get name and password
+   #puts "heyyyyyyy!! #{params} bsssssss"
+
+  if student1 = Student.find_by_email(email) and student1.password == password
+
+      @display =  " student login "
+
+  elsif instructor1 = Instructor.find_by_email(email)  #and instructor1.password == password
+            
+            
+      puts "nhasjfhasjfasgfjagsfkjgajsgfkjagsfkjagdsgfjgadsjkgkjsdajkgkjasdgjsakjg"
+      @display =  " instructor login "
+
+            respond_to do |format|
+                format.json {render json: [instructor1,  "this is an instructor"] }
+      end
+
+
+  else
+    @display =  "wrong email or password"
+          respond_to do |format|
+                format.json {render json: "wrong input maaaaaaaan"}
+      end
+  end
+
   end
 
   # GET /students/1
