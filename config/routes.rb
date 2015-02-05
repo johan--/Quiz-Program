@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  devise_for :students
   match ':controller(/:action)' , :via => :get 
 
   resources :instructors
