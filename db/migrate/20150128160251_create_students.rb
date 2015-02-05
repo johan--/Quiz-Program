@@ -6,10 +6,8 @@ class CreateStudents < ActiveRecord::Migration
       t.date :date_of_birth
       t.integer :expected_year_of_graduation
       t.string :personal_image
-      t.integer :section_number
-      t.string :email
+      t.integer :section_numberl
       t.string :gender
-      t.string :password
       t.string :studying_year
 
       t.timestamps null: false
