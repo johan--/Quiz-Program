@@ -11,13 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129145438) do
+ActiveRecord::Schema.define(version: 20150205151440) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name",                 limit: 255
     t.string   "gender",               limit: 255
-    t.string   "email",                limit: 255
-    t.string   "password",             limit: 255
     t.boolean  "admin_authority",      limit: 1
     t.boolean  "instructor_authority", limit: 1
     t.boolean  "department_authority", limit: 1
@@ -37,11 +35,9 @@ ActiveRecord::Schema.define(version: 20150129145438) do
 
   create_table "instructors", force: :cascade do |t|
     t.string   "name",           limit: 255
-    t.string   "email",          limit: 255
     t.string   "gender",         limit: 255
     t.string   "role",           limit: 255
     t.string   "personal_image", limit: 255
-    t.string   "password",       limit: 255
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
@@ -106,10 +102,11 @@ ActiveRecord::Schema.define(version: 20150129145438) do
     t.datetime "time_to_be_published"
     t.integer  "average_degree",         limit: 4
     t.integer  "quiz_mark",              limit: 4
+    t.string   "title",                  limit: 255
     t.integer  "instructor_id",          limit: 4
     t.integer  "subject_id",             limit: 4
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "students", force: :cascade do |t|
@@ -118,13 +115,26 @@ ActiveRecord::Schema.define(version: 20150129145438) do
     t.integer  "expected_year_of_graduation", limit: 4
     t.string   "personal_image",              limit: 255
     t.integer  "section_number",              limit: 4
-    t.string   "email",                       limit: 255
     t.string   "gender",                      limit: 255
-    t.string   "password",                    limit: 255
     t.string   "studying_year",               limit: 255
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+    t.string   "email",                       limit: 255, default: "",       null: false
+    t.string   "encrypted_password",          limit: 255, default: "abc123", null: false
+    t.string   "reset_password_token",        limit: 255
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",               limit: 4,   default: 0,        null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip",          limit: 255
+    t.string   "last_sign_in_ip",             limit: 255
+    t.string   "unlock_token",                limit: 255
   end
+
+  add_index "students", ["email"], name: "index_students_on_email", unique: true, using: :btree
+  add_index "students", ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true, using: :btree
+  add_index "students", ["unlock_token"], name: "index_students_on_unlock_token", unique: true, using: :btree
 
   create_table "students_subjects", id: false, force: :cascade do |t|
     t.integer "student_id", limit: 4
