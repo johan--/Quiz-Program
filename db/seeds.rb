@@ -94,3 +94,5 @@ quizM5 = QuizMark.create(student_quiz_mark: 20)
 admin1 = Admin.create(name: "admin1",gender: "male",email: "admin1@gmail.com",
 	admin_authority: true,instructor_authority: true,department_authority: true,
 	subject_authority: true,reply_msg_authority: true,student_authority: true )
+
+
