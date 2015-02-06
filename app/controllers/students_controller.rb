@@ -1,22 +1,13 @@
 class StudentsController < UsersController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_student! 
   # GET /students
   # GET /students.json
   def index
-    # @students = Student.all
-        #password = "passIns1"
-  #email = "cherifSalama@gmail.com"
-  #logindata=params
+
   email = params[:gg]
   password = params[:hh]
 
-
-    #email = logindata[:email]
-    #password= logindata[:password]
-    #puts logindata
-    # JSON to get name and password
-   #puts "heyyyyyyy!! #{params} bsssssss"
 
   if student1 = Student.find_by_email(email) and student1.password == password
 
@@ -34,10 +25,10 @@ class StudentsController < UsersController
 
 
   else
-    @display =  "wrong email or password"
+   # @display =  "wrong email or password"
           respond_to do |format|
-                format.json {render json: "wrong input maaaaaaaan"}
-      end
+                format.json
+       end
   end
 
   end

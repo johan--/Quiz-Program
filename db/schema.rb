@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 20150205224045) do
     t.date     "date_of_birth"
     t.integer  "expected_year_of_graduation", limit: 4
     t.string   "personal_image",              limit: 255
-    t.integer  "section_numberl",             limit: 4
+    t.integer  "section_number",              limit: 4
     t.string   "gender",                      limit: 255
     t.string   "studying_year",               limit: 255
     t.datetime "created_at",                                           null: false
