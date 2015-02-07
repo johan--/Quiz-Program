@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
+ # get 'students/index'
 
-  devise_for :students,:controllers => {sessions:'sessions'} # custom controller for 
+  devise_for :students,:controllers => {sessions:'sessions'}
 
   match ':controller(/:action)' , :via => :get 
 
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
   resources :users
 
 
-root 'users#login'
+  root 'students#index'
 
   get 'users/login'
   # The priority is based upon order of creation: first created -> highest priority.

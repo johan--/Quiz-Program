@@ -1,34 +1,24 @@
-class StudentsController < UsersController
+class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_student! 
   # GET /students
   # GET /students.json
   def index
-
-  email = params[:gg]
-  password = params[:hh]
-
+    puts "I'm in the students controller index action do you see me"
+   email = current_student.email
+   password = current_student.password
 
   if student1 = Student.find_by_email(email) and student1.password == password
+    puts "im in the if method to render the json of the student which is found :D "
 
-      @display =  " student login "
-
-  elsif instructor1 = Instructor.find_by_email(email)  #and instructor1.password == password
-            
-            
-      puts "nhasjfhasjfasgfjagsfkjgajsgfkjagsfkjagdsgfjgadsjkgkjsdajkgkjasdgjsakjg"
-      @display =  " instructor login "
-
-            respond_to do |format|
-                format.json {render json: [instructor1,  "this is an instructor"] }
-      end
-
-
+    render json: student1
+              # respond_to do |format|
+              #   format.json
+              # end
   else
-   # @display =  "wrong email or password"
           respond_to do |format|
                 format.json
-       end
+          end
   end
 
   end
@@ -36,6 +26,7 @@ class StudentsController < UsersController
   # GET /students/1
   # GET /students/1.json
   def show
+    render json: current_student
   end
 
   # GET /students/new
@@ -80,6 +71,7 @@ class StudentsController < UsersController
   # DELETE /students/1
   # DELETE /students/1.json
   def destroy
+    puts "why im here "
     @student.destroy
     respond_to do |format|
       format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
