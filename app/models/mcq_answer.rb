@@ -1,4 +1,7 @@
 class McqAnswer < ActiveRecord::Base
-belongs_to :student
-belongs_to :mcq
+	belongs_to :student
+	belongs_to :mcq
+
+    
+
 end

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :quizes
+
   match ':controller(/:action)' , :via => :get 
 
   resources :instructors
