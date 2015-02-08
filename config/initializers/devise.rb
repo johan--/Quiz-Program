@@ -1,7 +1,7 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
  Devise::TokenAuthenticatable.setup do |config|
-  config.token_authentication_key = :auth
+  config.token_authentication_key = :auth_token
 end
 
 Devise.setup do |config|
