@@ -1,22 +1,16 @@
 Rails.application.routes.draw do
 
-# post 'login' , to: 'sessions/create'
-
   devise_scope :student do
     get "/sign_in" => "sessions#new"
     post "/sign_in" => "sessions#create"
     delete "/sign_out" => "sessions#destroy"
   end
- #devise_for :students,:controllers => {sessions:'sessions'}
-
+ 
   match ':controller(/:action)' , :via => :get 
 
   resources :instructors
 
   resources :students
-
-  resources :users
-
 
   root 'students#index'
 
