@@ -4,7 +4,7 @@ class McqAnswersController < ApplicationController
 
 
 		params[:answers].each do |x|
-			McqAnswer.create(quiz_id: params[:quiz_id], )
+			McqAnswer.create(quiz_id: params[:quiz_id] )
 
 
 
