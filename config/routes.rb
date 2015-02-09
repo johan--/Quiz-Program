@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :students , :controllers => {sessions:'sessions'}
+
   devise_scope :student do
     get "/sign_in" => "sessions#new"
     post "/sign_in" => "sessions#create"

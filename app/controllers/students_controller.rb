@@ -5,10 +5,10 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     puts "I'm in the students controller index action do you see me"
-   email = current_student.email
-   password = current_student.password
+   email = "fadyfares@gmail.com"
+   password = "passStu1"
 
-  if student1 = Student.find_by_email(email) and student1.password == password
+  if student1 = Student.find_by_email(email) and student1.valid_password?(password)
     puts "im in the if method to render the json of the student which is found :D "
 
     render json: student1
