@@ -38973,3 +38973,726 @@ Can't verify CSRF token authenticity
   [1m[35mSQL (0.7ms)[0m  UPDATE `admins` SET `authentication_token` = 'ZmpoQ3fxer-8R3Vs8MxL', `updated_at` = '2015-02-09 06:45:26.435421' WHERE `admins`.`id` = 1
   [1m[36m (33.0ms)[0m  [1mCOMMIT[0m
 Completed 200 OK in 145ms (Views: 0.3ms | ActiveRecord: 115.5ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 08:59:19 +0200
+
+SyntaxError (/home/mido/Quiz-Program/app/controllers/application_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end):
+  app/controllers/application_controller.rb:15: syntax error, unexpected end-of-input, expecting keyword_end
+  app/controllers/sessions_controller.rb:1:in `<top (required)>'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (9.4ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.5ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (12.2ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.7ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (49.8ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 08:59:56 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.6ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'mohamedahmed@gmail.com' LIMIT 1[0m
+  [1m[35mAdmin Load (0.6ms)[0m  SELECT  `admins`.* FROM `admins` WHERE `admins`.`email` = 'mohamedahmed@gmail.com' LIMIT 1
+Completed 401 Unauthorized in 194ms (Views: 0.3ms | ActiveRecord: 9.7ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:00:31 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (1.3ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36mStudent Load (0.7ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = '-PPwypxGzrg3ueWfLyC4'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE `students` SET `authentication_token` = '-PPwypxGzrg3ueWfLyC4', `updated_at` = '2015-02-09 07:00:31.577060' WHERE `students`.`id` = 1[0m
+  [1m[35m (49.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:00:31.630107', `current_sign_in_at` = '2015-02-09 07:00:31.630107', `last_sign_in_ip` = '127.0.0.1', `current_sign_in_ip` = '127.0.0.1', `sign_in_count` = 1, `updated_at` = '2015-02-09 07:00:31.632354' WHERE `students`.`id` = 1
+  [1m[36m (53.3ms)[0m  [1mCOMMIT[0m
+Completed 201 Created in 400ms (Views: 0.5ms | ActiveRecord: 107.9ms)
+
+
+Started DELETE "/sign_out.json" for 127.0.0.1 at 2015-02-09 09:00:49 +0200
+Processing by SessionsController#destroy as JSON
+  Parameters: {"auth_token"=>"-PPwypxGzrg3ueWfLyC4"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (1.1ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = '-PPwypxGzrg3ueWfLyC4'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE `students` SET `current_sign_in_at` = '2015-02-09 07:00:49.555943', `sign_in_count` = 2, `updated_at` = '2015-02-09 07:00:49.558128' WHERE `students`.`id` = 1
+  [1m[36m (170.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mStudent Load (1.1ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = '-PPwypxGzrg3ueWfLyC4'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36mStudent Load (0.6ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'xiNnoPTtezwcxwyitU6s'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE `students` SET `authentication_token` = 'xiNnoPTtezwcxwyitU6s', `updated_at` = '2015-02-09 07:00:49.751520' WHERE `students`.`id` = 1[0m
+  [1m[35m (41.6ms)[0m  COMMIT
+Completed 200 OK in 247ms (Views: 0.7ms | ActiveRecord: 216.0ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:01:16 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.3ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.7ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com'  ORDER BY `instructors`.`id` ASC LIMIT 1[0m
+  [1m[35mInstructor Load (0.7ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`authentication_token` = 'ksxXdmisZa1ozMpSFYTp'  ORDER BY `instructors`.`id` ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE `instructors` SET `authentication_token` = 'ksxXdmisZa1ozMpSFYTp', `updated_at` = '2015-02-09 07:01:16.341753' WHERE `instructors`.`id` = 1
+  [1m[36m (52.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE `instructors` SET `last_sign_in_at` = '2015-02-09 07:01:16.397650', `current_sign_in_at` = '2015-02-09 07:01:16.397650', `last_sign_in_ip` = '127.0.0.1', `current_sign_in_ip` = '127.0.0.1', `sign_in_count` = 1, `updated_at` = '2015-02-09 07:01:16.401653' WHERE `instructors`.`id` = 1[0m
+  [1m[35m (59.2ms)[0m  COMMIT
+Completed 201 Created in 423ms (Views: 0.8ms | ActiveRecord: 115.9ms)
+
+
+Started DELETE "/sign_out.json" for 127.0.0.1 at 2015-02-09 09:01:33 +0200
+Processing by SessionsController#destroy as JSON
+  Parameters: {"auth_token"=>"ksxXdmisZa1ozMpSFYTp"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.7ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'ksxXdmisZa1ozMpSFYTp'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35mAdmin Load (0.5ms)[0m  SELECT  `admins`.* FROM `admins` WHERE `admins`.`authentication_token` = 'ksxXdmisZa1ozMpSFYTp'  ORDER BY `admins`.`id` ASC LIMIT 1
+  [1m[36mInstructor Load (0.6ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`authentication_token` = 'ksxXdmisZa1ozMpSFYTp'  ORDER BY `instructors`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE `instructors` SET `current_sign_in_at` = '2015-02-09 07:01:33.957566', `sign_in_count` = 2, `updated_at` = '2015-02-09 07:01:33.959490' WHERE `instructors`.`id` = 1[0m
+  [1m[35m (43.2ms)[0m  COMMIT
+  [1m[36mInstructor Load (0.8ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`authentication_token` = 'ksxXdmisZa1ozMpSFYTp'  ORDER BY `instructors`.`id` ASC LIMIT 1[0m
+  [1m[35mInstructor Load (0.5ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`authentication_token` = 'ceFA6m1z-guBBJX--WHB'  ORDER BY `instructors`.`id` ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE `instructors` SET `authentication_token` = 'ceFA6m1z-guBBJX--WHB', `updated_at` = '2015-02-09 07:01:34.009234' WHERE `instructors`.`id` = 1
+  [1m[36m (37.4ms)[0m  [1mCOMMIT[0m
+Completed 200 OK in 101ms (Views: 0.6ms | ActiveRecord: 85.2ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:01:49 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1
+  [1m[36mStudent Load (0.9ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:00:49.000000', `current_sign_in_at` = '2015-02-09 07:01:49.453929', `sign_in_count` = 3, `updated_at` = '2015-02-09 07:01:49.456120' WHERE `students`.`id` = 1[0m
+  [1m[35m (50.0ms)[0m  COMMIT
+Completed 201 Created in 336ms (Views: 0.7ms | ActiveRecord: 52.5ms)
+
+
+Started GET "/students/index.json" for 127.0.0.1 at 2015-02-09 09:02:10 +0200
+Processing by StudentsController#index as JSON
+Completed 401 Unauthorized in 7ms
+
+
+Started GET "/students/index.json?auth_token=xiNnoPTtezwcxwyitU6s" for 127.0.0.1 at 2015-02-09 09:02:19 +0200
+Processing by StudentsController#index as JSON
+  Parameters: {"auth_token"=>"xiNnoPTtezwcxwyitU6s"}
+  [1m[36mStudent Load (0.9ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'xiNnoPTtezwcxwyitU6s'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:01:49.000000', `current_sign_in_at` = '2015-02-09 07:02:19.349727', `sign_in_count` = 4, `updated_at` = '2015-02-09 07:02:19.351760' WHERE `students`.`id` = 1[0m
+  [1m[35m (38.7ms)[0m  COMMIT
+  [1m[36mStudent Load (0.9ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+Completed 200 OK in 196ms (Views: 2.3ms | ActiveRecord: 41.5ms)
+
+
+Started DELETE "/sign_out.json" for 127.0.0.1 at 2015-02-09 09:15:36 +0200
+Processing by SessionsController#destroy as JSON
+  Parameters: {"auth_token"=>"xiNnoPTtezwcxwyitU6s"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'xiNnoPTtezwcxwyitU6s'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:02:19.000000', `current_sign_in_at` = '2015-02-09 07:15:36.704789', `sign_in_count` = 5, `updated_at` = '2015-02-09 07:15:36.706779' WHERE `students`.`id` = 1
+  [1m[36m (53.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'xiNnoPTtezwcxwyitU6s'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36mStudent Load (0.5ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'WtoGxzEMxvMzBYQWDtDk'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE `students` SET `authentication_token` = 'WtoGxzEMxvMzBYQWDtDk', `updated_at` = '2015-02-09 07:15:36.772250' WHERE `students`.`id` = 1[0m
+  [1m[35m (34.3ms)[0m  COMMIT
+Completed 200 OK in 130ms (Views: 0.6ms | ActiveRecord: 94.1ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:20:06 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.7ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.8ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:15:36.000000', `current_sign_in_at` = '2015-02-09 07:20:07.175028', `sign_in_count` = 6, `updated_at` = '2015-02-09 07:20:07.177146' WHERE `students`.`id` = 1
+  [1m[36m (44.7ms)[0m  [1mCOMMIT[0m
+Completed 500 Internal Server Error in 351ms
+
+ActionView::MissingTemplate (Missing template /cretae.json.jbuilder with {:locale=>[:en], :formats=>[:json], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder]}. Searched in:
+  * "/home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates"
+  * "/home/mido/Quiz-Program/app/views"
+  * "/home/mido/.rvm/gems/ruby-2.2.0/gems/devise-3.4.1/app/views"
+):
+  app/controllers/sessions_controller.rb:10:in `create'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (10.7ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (10.6ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.4ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/missing_template.html.erb within rescues/layout (43.0ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:20:53 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1
+  [1m[36mStudent Load (0.7ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:20:07.000000', `current_sign_in_at` = '2015-02-09 07:20:53.634883', `sign_in_count` = 7, `updated_at` = '2015-02-09 07:20:53.637008' WHERE `students`.`id` = 1[0m
+  [1m[35m (48.8ms)[0m  COMMIT
+Completed 500 Internal Server Error in 354ms
+
+ActionView::MissingTemplate (Missing template /cretae.json.jbuilder with {:locale=>[:en], :formats=>[:json], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder]}. Searched in:
+  * "/home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates"
+  * "/home/mido/Quiz-Program/app/views"
+  * "/home/mido/.rvm/gems/ruby-2.2.0/gems/devise-3.4.1/app/views"
+):
+  app/controllers/sessions_controller.rb:11:in `create'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (11.6ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.1ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (2.1ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/missing_template.html.erb within rescues/layout (40.4ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:21:25 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.6ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:20:53.000000', `current_sign_in_at` = '2015-02-09 07:21:25.651486', `sign_in_count` = 8, `updated_at` = '2015-02-09 07:21:25.653509' WHERE `students`.`id` = 1
+  [1m[36m (55.6ms)[0m  [1mCOMMIT[0m
+Completed 500 Internal Server Error in 364ms
+
+ActionView::MissingTemplate (Missing template /create.json.jbuilder with {:locale=>[:en], :formats=>[:json], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :jbuilder]}. Searched in:
+  * "/home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates"
+  * "/home/mido/Quiz-Program/app/views"
+  * "/home/mido/.rvm/gems/ruby-2.2.0/gems/devise-3.4.1/app/views"
+):
+  app/controllers/sessions_controller.rb:11:in `create'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (11.8ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.2ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.1ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.3ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/missing_template.html.erb within rescues/layout (42.5ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:23:07 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.8ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:21:25.000000', `current_sign_in_at` = '2015-02-09 07:23:07.720092', `sign_in_count` = 9, `updated_at` = '2015-02-09 07:23:07.722176' WHERE `students`.`id` = 1[0m
+  [1m[35m (55.8ms)[0m  COMMIT
+  Rendered sessions/create.json.jbuilder (13.8ms)
+Completed 500 Internal Server Error in 382ms
+
+ActionView::Template::Error (undefined local variable or method `user' for #<#<Class:0xc4ca778>:0xc4c8554>):
+    1: 
+    2: json.authentication_token(user.authentication_token)
+    3: json.name(user.name)
+    4: json.role(@role)
+  app/views/sessions/create.json.jbuilder:2:in `_app_views_sessions_create_json_jbuilder__107189195_103160500'
+  app/controllers/sessions_controller.rb:11:in `create'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (11.2ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.4ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.2ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (37.4ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:27:00 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.7ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.8ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:23:07.000000', `current_sign_in_at` = '2015-02-09 07:27:01.326774', `sign_in_count` = 10, `updated_at` = '2015-02-09 07:27:01.328987' WHERE `students`.`id` = 1
+  [1m[36m (50.7ms)[0m  [1mCOMMIT[0m
+  Rendered sessions/create.json.jbuilder (6.8ms)
+Completed 500 Internal Server Error in 377ms
+
+ActionView::Template::Error (undefined method `authentication_token' for nil:NilClass):
+    1: 
+    2: json.authentication_token(params[:user].authentication_token)
+    3: json.name(user.name)
+    4: json.role(@role)
+  app/views/sessions/create.json.jbuilder:2:in `_app_views_sessions_create_json_jbuilder__107189195__631376528'
+  app/controllers/sessions_controller.rb:10:in `create'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (11.4ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.5ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.3ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (37.9ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:28:52 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:27:01.000000', `current_sign_in_at` = '2015-02-09 07:28:52.893790', `sign_in_count` = 11, `updated_at` = '2015-02-09 07:28:52.895949' WHERE `students`.`id` = 1[0m
+  [1m[35m (41.1ms)[0m  COMMIT
+  Rendered sessions/create.json.jbuilder (3.4ms)
+Completed 201 Created in 361ms (Views: 14.1ms | ActiveRecord: 47.0ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:34:34 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:28:52.000000', `current_sign_in_at` = '2015-02-09 07:34:34.845630', `sign_in_count` = 12, `updated_at` = '2015-02-09 07:34:34.847820' WHERE `students`.`id` = 1
+  [1m[36m (48.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mSubject Load (0.7ms)[0m  SELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 1
+  Rendered sessions/create.json.jbuilder (44.2ms)
+Completed 201 Created in 420ms (Views: 50.8ms | ActiveRecord: 58.7ms)
+  [1m[35mStudent Load (0.9ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 1 LIMIT 1
+  [1m[36mSubject Load (0.6ms)[0m  [1mSELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`id` = 1 LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO `students_subjects` (`student_id`, `subject_id`) VALUES (1, 1)[0m
+  [1m[35m (39.0ms)[0m  COMMIT
+  [1m[36mSubject Load (0.7ms)[0m  [1mSELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 1[0m
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 1 LIMIT 1
+  [1m[36mSubject Load (0.8ms)[0m  [1mSELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`id` = 2 LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO `students_subjects` (`student_id`, `subject_id`) VALUES (1, 2)[0m
+  [1m[35m (51.3ms)[0m  COMMIT
+  [1m[36mSubject Load (0.4ms)[0m  [1mSELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 1[0m
+  [1m[35mStudent Load (0.5ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 1 LIMIT 1
+  [1m[36mSubject Load (0.8ms)[0m  [1mSELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`id` = 3 LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `students_subjects` (`student_id`, `subject_id`) VALUES (1, 3)[0m
+  [1m[35m (36.9ms)[0m  COMMIT
+  [1m[36mSubject Load (0.4ms)[0m  [1mSELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 1[0m
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:35:16 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.5ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.8ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:34:34.000000', `current_sign_in_at` = '2015-02-09 07:35:16.763896', `sign_in_count` = 13, `updated_at` = '2015-02-09 07:35:16.766148' WHERE `students`.`id` = 1
+  [1m[36m (44.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mSubject Load (0.4ms)[0m  SELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 1
+  Rendered sessions/create.json.jbuilder (11.4ms)
+Completed 201 Created in 347ms (Views: 18.2ms | ActiveRecord: 47.4ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 09:44:57 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:35:16.000000', `current_sign_in_at` = '2015-02-09 07:44:57.808136', `sign_in_count` = 14, `updated_at` = '2015-02-09 07:44:57.809999' WHERE `students`.`id` = 1
+  [1m[36m (47.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mSubject Load (0.3ms)[0m  SELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 1
+  Rendered sessions/create.json.jbuilder (2.3ms)
+Completed 201 Created in 341ms (Views: 10.6ms | ActiveRecord: 49.9ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 10:15:11 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.9ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 07:44:57.000000', `current_sign_in_at` = '2015-02-09 08:15:12.399393', `sign_in_count` = 15, `updated_at` = '2015-02-09 08:15:12.401615' WHERE `students`.`id` = 1
+  [1m[36m (51.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mSubject Load (0.3ms)[0m  SELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 1
+  Rendered sessions/create.json.jbuilder (26.8ms)
+Completed 500 Internal Server Error in 402ms
+
+ActionView::Template::Error (undefined method `first' for nil:NilClass):
+     5: json.subjects user.subjects , :subject
+     6: 
+     7: if student_signed_in?
+     8: json.coming_quiz_subject(@come.first.subject)
+     9: 
+    10: end
+  app/views/sessions/create.json.jbuilder:8:in `_app_views_sessions_create_json_jbuilder__107189195__632106628'
+  app/controllers/sessions_controller.rb:11:in `create'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (15.0ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (5.7ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.4ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (43.9ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 10:17:12 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.9ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 08:15:12.000000', `current_sign_in_at` = '2015-02-09 08:17:13.319832', `sign_in_count` = 16, `updated_at` = '2015-02-09 08:17:13.322013' WHERE `students`.`id` = 1
+  [1m[36m (44.6ms)[0m  [1mCOMMIT[0m
+Completed 500 Internal Server Error in 351ms
+
+NoMethodError (undefined method `first' for nil:NilClass):
+  app/controllers/sessions_controller.rb:11:in `create'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (8.6ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (3.6ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.2ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (34.5ms)
+  [1m[35mQuiz Load (11.5ms)[0m  SELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published DESC LIMIT 5
+  [1m[36mQuiz Load (0.6ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 5[0m
+  [1m[35mQuiz Load (0.8ms)[0m  SELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1
+  [1m[36mQuiz Load (0.4ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1[0m
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 10:23:29 +0200
+  [1m[35mQuiz Load (0.3ms)[0m  SELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.9ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.6ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 08:17:13.000000', `current_sign_in_at` = '2015-02-09 08:23:29.613522', `sign_in_count` = 17, `updated_at` = '2015-02-09 08:23:29.615648' WHERE `students`.`id` = 1
+  [1m[36m (50.0ms)[0m  [1mCOMMIT[0m
+Completed 500 Internal Server Error in 351ms
+
+NoMethodError (undefined method `first' for nil:NilClass):
+  app/controllers/sessions_controller.rb:11:in `create'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (8.6ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (3.7ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.3ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (34.9ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 10:24:29 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1
+  [1m[36mStudent Load (0.7ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-09 08:23:29.000000', `current_sign_in_at` = '2015-02-09 08:24:29.519042', `sign_in_count` = 18, `updated_at` = '2015-02-09 08:24:29.521064' WHERE `students`.`id` = 1[0m
+  [1m[35m (42.2ms)[0m  COMMIT
+  [1m[36mQuiz Load (0.4ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1[0m
+  [1m[35mSubject Load (0.3ms)[0m  SELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 1
+  Rendered sessions/create.json.jbuilder (31.7ms)
+Completed 201 Created in 404ms (Views: 37.0ms | ActiveRecord: 53.7ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 10:26:09 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 08:24:29.000000', `current_sign_in_at` = '2015-02-09 08:26:09.544960', `sign_in_count` = 19, `updated_at` = '2015-02-09 08:26:09.547022' WHERE `students`.`id` = 1
+  [1m[36m (37.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.3ms)[0m  SELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1
+  [1m[36mSubject Load (0.3ms)[0m  [1mSELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 1[0m
+  Rendered sessions/create.json.jbuilder (27.8ms)
+Completed 201 Created in 390ms (Views: 30.6ms | ActiveRecord: 49.3ms)
+  [1m[35mQuiz Load (0.4ms)[0m  SELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1
+  [1m[36mQuiz Load (0.4ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1[0m
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 11:30:42 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1
+  [1m[36mStudent Load (0.7ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-09 08:26:09.000000', `current_sign_in_at` = '2015-02-09 09:30:42.445519', `sign_in_count` = 20, `updated_at` = '2015-02-09 09:30:42.447746' WHERE `students`.`id` = 1[0m
+  [1m[35m (70.4ms)[0m  COMMIT
+  [1m[36mQuiz Load (0.3ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1[0m
+  [1m[35mSubject Load (0.2ms)[0m  SELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 1
+  Rendered sessions/create.json.jbuilder (33.2ms)
+Completed 500 Internal Server Error in 434ms
+
+ActionView::Template::Error (undefined method `time_to_be_published' for nil:NilClass):
+     6: 
+     7: if student_signed_in?
+     8: json.coming_quiz_subject(coming_quiz.subject)
+     9: json.coming_quiz_time(@coming_quiz.time_to_be_published.to_s)
+    10: json.coming_quiz_title
+    11: end
+  app/views/sessions/create.json.jbuilder:9:in `_app_views_sessions_create_json_jbuilder__107189195_103002470'
+  app/controllers/sessions_controller.rb:10:in `create'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (11.2ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (4.4ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.4ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.3ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/template_error.html.erb within rescues/layout (37.6ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 11:31:17 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"fadyfares@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.5ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.8ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 09:30:42.000000', `current_sign_in_at` = '2015-02-09 09:31:18.207925', `sign_in_count` = 21, `updated_at` = '2015-02-09 09:31:18.210045' WHERE `students`.`id` = 1
+  [1m[36m (44.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.2ms)[0m  SELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1
+  [1m[36mSubject Load (0.2ms)[0m  [1mSELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 1[0m
+  Rendered sessions/create.json.jbuilder (2.4ms)
+Completed 201 Created in 334ms (Views: 6.0ms | ActiveRecord: 47.6ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 12:43:48 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.8ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'CSUyGmPkpz1_PtKs34hy'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (16.6ms)[0m  UPDATE `students` SET `authentication_token` = 'CSUyGmPkpz1_PtKs34hy', `updated_at` = '2015-02-09 10:43:48.652042' WHERE `students`.`id` = 2
+  [1m[36m (55.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-09 10:43:48.728359', `current_sign_in_at` = '2015-02-09 10:43:48.728359', `last_sign_in_ip` = '127.0.0.1', `current_sign_in_ip` = '127.0.0.1', `sign_in_count` = 1, `updated_at` = '2015-02-09 10:43:48.730205' WHERE `students`.`id` = 2[0m
+  [1m[35m (40.1ms)[0m  COMMIT
+  [1m[36mQuiz Load (0.7ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1[0m
+  [1m[35mSubject Load (0.7ms)[0m  SELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 2
+  Rendered sessions/create.json.jbuilder (164.7ms)
+Completed 201 Created in 736ms (Views: 240.5ms | ActiveRecord: 126.1ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 12:44:07 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.6ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE `students` SET `current_sign_in_at` = '2015-02-09 10:44:08.184889', `sign_in_count` = 2, `updated_at` = '2015-02-09 10:44:08.186977' WHERE `students`.`id` = 2
+  [1m[36m (45.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.2ms)[0m  SELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 2[0m
+  Rendered sessions/create.json.jbuilder (1.6ms)
+Completed 201 Created in 340ms (Views: 5.4ms | ActiveRecord: 48.1ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 12:45:02 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-09 10:44:08.000000', `current_sign_in_at` = '2015-02-09 10:45:02.887976', `sign_in_count` = 3, `updated_at` = '2015-02-09 10:45:02.890015' WHERE `students`.`id` = 2[0m
+  [1m[35m (48.8ms)[0m  COMMIT
+  [1m[36mQuiz Load (0.1ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1[0m
+  Rendered sessions/create.json.jbuilder (0.6ms)
+Completed 201 Created in 341ms (Views: 4.9ms | ActiveRecord: 51.3ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 13:35:00 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (2.0ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` IS NULL LIMIT 1
+  [1m[36mInstructor Load (0.6ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` IS NULL LIMIT 1[0m
+  [1m[35mAdmin Load (0.4ms)[0m  SELECT  `admins`.* FROM `admins` WHERE `admins`.`email` IS NULL LIMIT 1
+Completed 401 Unauthorized in 17ms (Views: 0.2ms | ActiveRecord: 7.4ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 13:35:24 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` IS NULL LIMIT 1[0m
+  [1m[35mInstructor Load (0.2ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` IS NULL LIMIT 1
+  [1m[36mAdmin Load (0.2ms)[0m  [1mSELECT  `admins`.* FROM `admins` WHERE `admins`.`email` IS NULL LIMIT 1[0m
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 13:35:52 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.3ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` IS NULL LIMIT 1
+  [1m[36mInstructor Load (0.3ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` IS NULL LIMIT 1[0m
+  [1m[35mAdmin Load (0.4ms)[0m  SELECT  `admins`.* FROM `admins` WHERE `admins`.`email` IS NULL LIMIT 1
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 13:44:51 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` IS NULL LIMIT 1[0m
+  [1m[35mInstructor Load (0.1ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` IS NULL LIMIT 1
+  [1m[36mAdmin Load (0.1ms)[0m  [1mSELECT  `admins`.* FROM `admins` WHERE `admins`.`email` IS NULL LIMIT 1[0m
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 13:44:59 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` IS NULL LIMIT 1
+  [1m[36mInstructor Load (0.2ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` IS NULL LIMIT 1[0m
+  [1m[35mAdmin Load (0.1ms)[0m  SELECT  `admins`.* FROM `admins` WHERE `admins`.`email` IS NULL LIMIT 1
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 13:50:00 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` IS NULL LIMIT 1[0m
+  [1m[35mInstructor Load (0.3ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` IS NULL LIMIT 1
+  [1m[36mAdmin Load (0.3ms)[0m  [1mSELECT  `admins`.* FROM `admins` WHERE `admins`.`email` IS NULL LIMIT 1[0m
+Completed 401 Unauthorized in 5ms (Views: 0.3ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 13:50:37 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` IS NULL LIMIT 1
+  [1m[36mInstructor Load (0.4ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` IS NULL LIMIT 1[0m
+  [1m[35mAdmin Load (0.3ms)[0m  SELECT  `admins`.* FROM `admins` WHERE `admins`.`email` IS NULL LIMIT 1
+Completed 401 Unauthorized in 5ms (Views: 0.3ms | ActiveRecord: 1.1ms)
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 1 LIMIT 1[0m
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 13:59:26 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` IS NULL LIMIT 1[0m
+  [1m[35mInstructor Load (0.4ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` IS NULL LIMIT 1
+  [1m[36mAdmin Load (0.3ms)[0m  [1mSELECT  `admins`.* FROM `admins` WHERE `admins`.`email` IS NULL LIMIT 1[0m
+Completed 401 Unauthorized in 6ms (Views: 0.3ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 13:59:45 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.5ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` IS NULL LIMIT 1
+  [1m[36mInstructor Load (0.4ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` IS NULL LIMIT 1[0m
+  [1m[35mAdmin Load (0.2ms)[0m  SELECT  `admins`.* FROM `admins` WHERE `admins`.`email` IS NULL LIMIT 1
+Completed 401 Unauthorized in 7ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 13:59:55 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "session"=>{"password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` IS NULL LIMIT 1[0m
+  [1m[35mInstructor Load (0.3ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` IS NULL LIMIT 1
+  [1m[36mAdmin Load (0.3ms)[0m  [1mSELECT  `admins`.* FROM `admins` WHERE `admins`.`email` IS NULL LIMIT 1[0m
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 14:01:46 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"mohamedhmed@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedhmed@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.5ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'mohamedhmed@gmail.com' LIMIT 1[0m
+  [1m[35mAdmin Load (0.6ms)[0m  SELECT  `admins`.* FROM `admins` WHERE `admins`.`email` = 'mohamedhmed@gmail.com' LIMIT 1
+Completed 401 Unauthorized in 6ms (Views: 0.2ms | ActiveRecord: 1.5ms)
+
+
+Started POST "/sign_in.json" for 127.0.0.1 at 2015-02-09 14:02:07 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"mohamedhmed@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedhmed@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.3ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'mohamedhmed@gmail.com' LIMIT 1
+  [1m[36mAdmin Load (0.3ms)[0m  [1mSELECT  `admins`.* FROM `admins` WHERE `admins`.`email` = 'mohamedhmed@gmail.com' LIMIT 1[0m
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 14:04:53 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"session"=>{}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.3ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` IS NULL LIMIT 1
+  [1m[36mInstructor Load (0.2ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` IS NULL LIMIT 1[0m
+  [1m[35mAdmin Load (0.3ms)[0m  SELECT  `admins`.* FROM `admins` WHERE `admins`.`email` IS NULL LIMIT 1
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 14:08:32 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "email"=>"fadyfares@gmail.com", "session"=>{"password"=>"[FILTERED]", "email"=>"fadyfares@gmail.com"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.7ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 09:31:18.000000', `current_sign_in_at` = '2015-02-09 12:08:32.310917', `current_sign_in_ip` = '192.168.1.35', `sign_in_count` = 22, `updated_at` = '2015-02-09 12:08:32.313050' WHERE `students`.`id` = 1
+  [1m[36m (43.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.2ms)[0m  SELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1
+  Rendered sessions/create.json.jbuilder (0.2ms)
+Completed 201 Created in 336ms (Views: 8.6ms | ActiveRecord: 46.0ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 14:08:43 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "email"=>"fadyfares@gmail.com", "session"=>{"password"=>"[FILTERED]", "email"=>"fadyfares@gmail.com"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.9ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 12:08:32.000000', `current_sign_in_at` = '2015-02-09 12:08:43.491213', `last_sign_in_ip` = '192.168.1.35', `sign_in_count` = 23, `updated_at` = '2015-02-09 12:08:43.493305' WHERE `students`.`id` = 1
+  [1m[36m (55.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.1ms)[0m  SELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1
+  Rendered sessions/create.json.jbuilder (0.8ms)
+Completed 201 Created in 346ms (Views: 5.9ms | ActiveRecord: 57.7ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.35 at 2015-02-09 14:09:32 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"password"=>"[FILTERED]", "email"=>"fadyfares@gmail.com", "session"=>{"password"=>"[FILTERED]", "email"=>"fadyfares@gmail.com"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.7ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'fadyfares@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-09 12:08:43.000000', `current_sign_in_at` = '2015-02-09 12:09:32.308415', `sign_in_count` = 24, `updated_at` = '2015-02-09 12:09:32.310606' WHERE `students`.`id` = 1
+  [1m[36m (46.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.4ms)[0m  SELECT  `quizzes`.* FROM `quizzes`  ORDER BY time_to_be_published ASC LIMIT 1
+  Rendered sessions/create.json.jbuilder (0.3ms)
+Completed 201 Created in 337ms (Views: 8.1ms | ActiveRecord: 49.2ms)

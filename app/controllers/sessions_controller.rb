@@ -1,14 +1,15 @@
 class SessionsController < ApplicationController
-
   before_action :authenticate_any! , :except => :create
+  
 
   def create
     user = find_user params[:email],params[:password]
     if user and user.valid_password?(params[:password])
       user.ensure_authentication_token!  # make sure the user has a token generated  
       sign_in user if user   
-      render :json => { :authentication_token => user.authentication_token, :name => user.name, role: @role},
-      :status => :created
+      render :template=>"sessions/create.json.jbuilder", :status=> :created, locals: {user: user,
+        coming_quiz: Quiz.coming_quizzes.first} , :formats => [:json]
+
     end
   end
 

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
 
   protected
+  
   	def authenticate_any!
   		if student_signed_in?
   			authenticate_student!
