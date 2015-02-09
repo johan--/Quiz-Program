@@ -6,4 +6,9 @@ class Quiz < ActiveRecord::Base
 	has_many :true_or_false_questions
 	has_many :mcqs
 	has_many :text_sentences
+
+
+	scope :coming_quizzes, -> { order("time_to_be_published ASC").limit(5)}
+	# scope :previous_quizzes, -> {where(created_at: 7.days.ago..Time.now)}
+
 end
