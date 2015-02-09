@@ -6,7 +6,7 @@ gem 'rails', '4.2.0'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+gem 'therubyracer'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -16,6 +16,12 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
+
+# gets a gem to validate email entries
+gem 'validates_email_format_of'
+
+# Use ActiveModel has_secure_password
+# gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise-token_authenticatable'
 

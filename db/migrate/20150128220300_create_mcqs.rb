@@ -9,9 +9,7 @@ class CreateMcqs < ActiveRecord::Migration
       t.text :hint_sentence
       t.integer :hint_discounted_mark
       t.string :answer
-
       t.integer :quiz_id
-
       t.timestamps null: false
       
     end

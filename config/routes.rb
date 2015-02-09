@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     delete "/sign_out" => "sessions#destroy"
   end
  
+
   match ':controller(/:action)' , :via => :get 
 
   resources :instructors

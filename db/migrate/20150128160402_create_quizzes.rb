@@ -6,10 +6,8 @@ class CreateQuizzes < ActiveRecord::Migration
       t.datetime :time_to_be_published
       t.integer :average_degree
       t.integer :quiz_mark
-
       t.integer :instructor_id
       t.integer :subject_id
-
       t.timestamps null: false
       
     end
