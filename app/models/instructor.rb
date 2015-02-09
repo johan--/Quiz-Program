@@ -6,7 +6,7 @@ class Instructor < ActiveRecord::Base
          
 	has_and_belongs_to_many :students
 	has_many :subjects
-	
+	has_many :quizzes
 
     validate :instructor_name_is_present_and_allowed
 
