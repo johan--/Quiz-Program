@@ -3,9 +3,7 @@ class CreateAdmins < ActiveRecord::Migration
     create_table :admins do |t|
 
       t.string :name
-      t.string :gender
-      t.string :email
-      t.string :password
+      t.string :gender 
       t.boolean :admin_authority
       t.boolean :instructor_authority
       t.boolean :department_authority

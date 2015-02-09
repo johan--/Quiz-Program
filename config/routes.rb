@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :admins
+  devise_for :instructors
   devise_for :students , :controllers => {sessions:'sessions'}
 
   devise_scope :student do

@@ -91,7 +91,7 @@ quizM3 = QuizMark.create(student_quiz_mark: 20)
 quizM4 = QuizMark.create(student_quiz_mark: 20)
 quizM5 = QuizMark.create(student_quiz_mark: 20)
 
-admin1 = Admin.create(name: "admin1",gender: "male",email: "admin1@gmail.com",
+admin1 = Admin.create(name: "admin1",gender: "male",email: "admin1@gmail.com", password: "passAd1",
 	admin_authority: true,instructor_authority: true,department_authority: true,
 	subject_authority: true,reply_msg_authority: true,student_authority: true )
 
