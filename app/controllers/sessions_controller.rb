@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  before_filter :authenticate_student! , :except => [:create,:destroy]
+  before_action :authenticate_any! , :except => :create
 
   def create
     user = find_user params[:email],params[:password]
