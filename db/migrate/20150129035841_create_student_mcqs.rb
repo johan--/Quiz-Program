@@ -1,4 +1,4 @@
-class CreateMcqAnswers < ActiveRecord::Migration
+class CreateStudentMcqs < ActiveRecord::Migration
   def change
     create_table :student_mcqs do |t|
 

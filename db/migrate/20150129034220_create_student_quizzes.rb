@@ -1,4 +1,4 @@
-class CreateQuizMarks < ActiveRecord::Migration
+class CreateStudentQuizzes < ActiveRecord::Migration
   def change
     create_table :student_quizzes do |t|
 

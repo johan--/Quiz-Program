@@ -1,4 +1,4 @@
-class CreateNumericalAnswers < ActiveRecord::Migration
+class CreateStudentNumericalQuestions < ActiveRecord::Migration
   def change
     create_table :student_numerical_questions do |t|
 

@@ -1,4 +1,4 @@
-class CreateTrueOrFalseAnswers < ActiveRecord::Migration
+class CreateStudentTrueOrFalseQuestions < ActiveRecord::Migration
   def change
     create_table :student_true_or_false_questions do |t|
 

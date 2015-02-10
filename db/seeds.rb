@@ -73,11 +73,11 @@ mcq6 = Mcq.create(question_mark: 1,explanation: "exp6",hint: true,bonus: false,
 mcq7 = Mcq.create(question_mark: 1,explanation: "exp7",hint: true,bonus: false,
 	hint_sentence: "hint7",hint_discounted_mark: 1,answer: 4)
 
-mcqAns1 = McqAnswer.create(student_answer: "choice1")
-mcqAns2 = McqAnswer.create(student_answer: "answer2")
-mcqAns3 = McqAnswer.create(student_answer: "answer3")
-mcqAns4 = McqAnswer.create(student_answer: "choice3")
-mcqAns5 = McqAnswer.create(student_answer: "answer5")
+# mcqAns1 = McqAnswer.create(student_answer: "choice1")
+# mcqAns2 = McqAnswer.create(student_answer: "answer2")
+# mcqAns3 = McqAnswer.create(student_answer: "answer3")
+# mcqAns4 = McqAnswer.create(student_answer: "choice3")
+# mcqAns5 = McqAnswer.create(student_answer: "answer5")
 
 Nuq1 = NumericalQuestion.create(question_mark: 2)
 Nuq2 = NumericalQuestion.create(question_mark: 2)
@@ -85,11 +85,11 @@ Nuq3 = NumericalQuestion.create(question_mark: 2)
 Nuq4 = NumericalQuestion.create(question_mark: 2)
 Nuq5 = NumericalQuestion.create(question_mark: 2)
 
-quizM1 = QuizMark.create(student_quiz_mark: 11)
-quizM2 = QuizMark.create(student_quiz_mark: 20)
-quizM3 = QuizMark.create(student_quiz_mark: 20)
-quizM4 = QuizMark.create(student_quiz_mark: 20)
-quizM5 = QuizMark.create(student_quiz_mark: 20)
+quizM1 = StudentQuiz.create(student_quiz_mark: 11)
+quizM2 = StudentQuiz.create(student_quiz_mark: 20)
+quizM3 = StudentQuiz.create(student_quiz_mark: 20)
+quizM4 = StudentQuiz.create(student_quiz_mark: 20)
+quizM5 = StudentQuiz.create(student_quiz_mark: 20)
 
 admin1 = Admin.create(name: "admin1",gender: "male",email: "admin1@gmail.com", password: "passAd1",
 	admin_authority: true,reply_msg_authority: true,add_authority: true )

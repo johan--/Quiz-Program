@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209042619) do
+ActiveRecord::Schema.define(version: 20150210164710) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name",                   limit: 255
@@ -37,13 +37,6 @@ ActiveRecord::Schema.define(version: 20150209042619) do
   add_index "admins", ["authentication_token"], name: "index_admins_on_authentication_token", unique: true, using: :btree
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
-
-  create_table "departments", force: :cascade do |t|
-    t.string   "department_name", limit: 255
-    t.integer  "begin_year",      limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-  end
 
   create_table "instructors", force: :cascade do |t|
     t.string   "name",                   limit: 255
@@ -74,14 +67,6 @@ ActiveRecord::Schema.define(version: 20150209042619) do
     t.integer "student_id",    limit: 4
   end
 
-  create_table "mcq_answers", force: :cascade do |t|
-    t.integer  "student_answer", limit: 4
-    t.integer  "student_id",     limit: 4
-    t.integer  "mcq_id",         limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
   create_table "mcqs", force: :cascade do |t|
     t.string   "question",             limit: 255
     t.string   "choice1",              limit: 255
@@ -100,14 +85,6 @@ ActiveRecord::Schema.define(version: 20150209042619) do
     t.datetime "updated_at",                                         null: false
   end
 
-  create_table "numerical_answers", force: :cascade do |t|
-    t.integer  "student_answer",        limit: 4
-    t.integer  "student_id",            limit: 4
-    t.integer  "numerical_question_id", limit: 4
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-  end
-
   create_table "numerical_questions", force: :cascade do |t|
     t.string   "question",             limit: 255
     t.integer  "question_mark",        limit: 4
@@ -122,14 +99,6 @@ ActiveRecord::Schema.define(version: 20150209042619) do
     t.datetime "updated_at",                                         null: false
   end
 
-  create_table "quiz_marks", force: :cascade do |t|
-    t.integer  "student_quiz_mark", limit: 4
-    t.integer  "student_id",        limit: 4
-    t.integer  "quiz_id",           limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-  end
-
   create_table "quizzes", force: :cascade do |t|
     t.time     "duration"
     t.string   "quiz_title",           limit: 255
@@ -142,6 +111,47 @@ ActiveRecord::Schema.define(version: 20150209042619) do
     t.datetime "updated_at",                       null: false
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.integer  "section_number", limit: 4
+    t.string   "department",     limit: 255
+    t.string   "studying_year",  limit: 255
+    t.string   "sub_department", limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "student_mcqs", force: :cascade do |t|
+    t.integer  "student_answer", limit: 4
+    t.integer  "student_id",     limit: 4
+    t.integer  "mcq_id",         limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "student_numerical_questions", force: :cascade do |t|
+    t.integer  "student_answer",        limit: 4
+    t.integer  "student_id",            limit: 4
+    t.integer  "numerical_question_id", limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  create_table "student_quizzes", force: :cascade do |t|
+    t.integer  "student_quiz_mark", limit: 4
+    t.integer  "student_id",        limit: 4
+    t.integer  "quiz_id",           limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "student_true_or_false_questions", force: :cascade do |t|
+    t.boolean  "student_answer",            limit: 1
+    t.integer  "true_or_false_question_id", limit: 4
+    t.integer  "student_id",                limit: 4
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
   create_table "students", force: :cascade do |t|
     t.string   "name",                        limit: 255
     t.date     "date_of_birth"
@@ -149,6 +159,7 @@ ActiveRecord::Schema.define(version: 20150209042619) do
     t.string   "personal_image",              limit: 255
     t.string   "gender",                      limit: 255
     t.string   "studying_year",               limit: 255
+    t.integer  "section_id",                  limit: 4
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
     t.string   "email",                       limit: 255, default: "", null: false
@@ -187,14 +198,6 @@ ActiveRecord::Schema.define(version: 20150209042619) do
     t.integer  "quiz_id",       limit: 4
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-  end
-
-  create_table "true_or_false_answers", force: :cascade do |t|
-    t.boolean  "student_answer",            limit: 1
-    t.integer  "true_or_false_question_id", limit: 4
-    t.integer  "student_id",                limit: 4
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
   end
 
   create_table "true_or_false_questions", force: :cascade do |t|
