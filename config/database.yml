@@ -49,6 +49,8 @@ test:
 #
 production:
   <<: *default
+  # adapter: postgresql
+  # pool: 5
   database: takeAQuiz_production
   username: takeAQuiz
   password: <%= ENV['TAKEAQUIZ_DATABASE_PASSWORD'] %>

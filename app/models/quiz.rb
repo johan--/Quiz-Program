@@ -30,8 +30,7 @@ class Quiz < ActiveRecord::Base
 
 
     
-    scope :coming_quizzes, -> { order("time_to_be_published ASC").limit(5)}
-    # scope :previous_quizzes, -> {where(created_at: 7.days.ago..Time.now)}
-
+    scope :arrange, -> { order("time_to_be_published ASC") }
+    scope :coming_quizzes, -> { where("time_to_be_published > ?", Time.now) }
 
 end

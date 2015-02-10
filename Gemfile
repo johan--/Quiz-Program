@@ -6,6 +6,7 @@ gem 'rails', '4.2.0'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+
 gem 'therubyracer'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -34,3 +35,8 @@ group :development, :test do
   gem 'spring'
 end
 
+group :production do
+gem 'rails_12factor'
+gem 'pg'
+ruby "2.2.0"
+end
