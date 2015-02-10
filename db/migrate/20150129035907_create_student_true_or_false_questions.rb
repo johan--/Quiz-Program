@@ -1,6 +1,6 @@
 class CreateTrueOrFalseAnswers < ActiveRecord::Migration
   def change
-    create_table :true_or_false_answers do |t|
+    create_table :student_true_or_false_questions do |t|
 
     	t.boolean :student_answer
 

@@ -1,4 +1,4 @@
-class QuizMark < ActiveRecord::Base
+class StudentQuiz < ActiveRecord::Base
 
 	######################## Relations ########################
 

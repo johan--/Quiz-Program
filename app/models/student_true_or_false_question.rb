@@ -1,4 +1,4 @@
-class TrueOrFalseAnswer < ActiveRecord::Base
+class StudentTrueOrFalseQuestion < ActiveRecord::Base
 
 	 ######################## Relations ########################
 

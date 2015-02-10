@@ -3,7 +3,9 @@ class Mcq < ActiveRecord::Base
     ######################## Relations ########################
 
 	belongs_to :quiz
-	has_many :mcq_answers
+
+	has_many :student_mcqs
+  has_many :students, through: :student_mcqs
     
     ######################## validations ########################
 

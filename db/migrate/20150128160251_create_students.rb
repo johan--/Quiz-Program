@@ -9,6 +9,8 @@ class CreateStudents < ActiveRecord::Migration
       t.string :gender
       t.string :studying_year
 
+      t.integer :section_id
+
       t.timestamps null: false
       
     end

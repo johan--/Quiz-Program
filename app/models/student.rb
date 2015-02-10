@@ -10,10 +10,20 @@ class Student < ActiveRecord::Base
 
 	has_and_belongs_to_many :subjects
 	has_and_belongs_to_many :instructors
-	has_many :quiz_marks
-	has_many :numerical_answers
-	has_many :mcq_answers
-	has_many :true_or_false_answers
+
+	has_many :student_quizzes
+	has_many :quizzes, through: :student_quizzes
+
+	has_many :student_numerical_questions
+	has_many :numerical_questions, through: :student_numerical_questions
+
+	has_many :student_mcqs
+	has_many :mcqs, through: :student_mcqs
+
+	has_many :student_true_or_false_questions
+	has_many :true_or_false_questions, through: :student_true_or_false_questions
+
+	belongs_to :section
 
 	
 	# The validation style used is the sexy validation

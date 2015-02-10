@@ -1,4 +1,4 @@
-class McqAnswer < ActiveRecord::Base
+class StudentMcq < ActiveRecord::Base
 
     ######################## Relations ########################
 

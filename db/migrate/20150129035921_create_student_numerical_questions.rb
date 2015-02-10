@@ -1,6 +1,6 @@
 class CreateNumericalAnswers < ActiveRecord::Migration
   def change
-    create_table :numerical_answers do |t|
+    create_table :student_numerical_questions do |t|
 
     	t.integer :student_answer
 

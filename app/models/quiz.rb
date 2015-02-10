@@ -4,7 +4,10 @@ class Quiz < ActiveRecord::Base
     
 	belongs_to :subject
 	belongs_to :instructor
-	has_many :quiz_marks
+
+	has_many :student_quizzes
+    has_many :students, through: :student_quizzes
+    
 	has_many :numerical_questions
 	has_many :true_or_false_questions
 	has_many :mcqs

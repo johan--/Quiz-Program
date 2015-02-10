@@ -1,6 +1,0 @@
-class McqAnswersController < ApplicationController
-
-
-
-
-end

@@ -1,6 +1,6 @@
 class CreateMcqAnswers < ActiveRecord::Migration
   def change
-    create_table :mcq_answers do |t|
+    create_table :student_mcqs do |t|
 
     	t.integer :student_answer
 

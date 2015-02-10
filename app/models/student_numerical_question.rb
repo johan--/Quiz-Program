@@ -1,4 +1,4 @@
-class NumericalAnswer < ActiveRecord::Base
+class StudentNumericalQuestion < ActiveRecord::Base
 
     ######################## Relations ########################
 

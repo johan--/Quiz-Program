@@ -1,6 +1,6 @@
 class CreateQuizMarks < ActiveRecord::Migration
   def change
-    create_table :quiz_marks do |t|
+    create_table :student_quizzes do |t|
 
     	t.integer :student_quiz_mark
 
