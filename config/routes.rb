@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
 
 
+  resources :student_quizzes
+
+  resources :student_mcqs
+
   devise_for :admins , :controllers => {sessions:'sessions'}
   devise_for :instructors , :controllers => {sessions:'sessions'}
   devise_for :students , :controllers => {sessions:'sessions'}

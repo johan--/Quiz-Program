@@ -699,3 +699,55 @@ WHERE fk.referenced_column_name is not null
   [1m[36mAdmin Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM `admins` WHERE `admins`.`email` = BINARY 'admin1@gmail.com' LIMIT 1[0m
   [1m[35mSQL (0.6ms)[0m  INSERT INTO `admins` (`name`, `gender`, `email`, `encrypted_password`, `admin_authority`, `reply_msg_authority`, `add_authority`, `created_at`, `updated_at`) VALUES ('admin1', 'male', 'admin1@gmail.com', '$2a$10$9rZlhVlH7WZgbyZSxMquFuR/olj1YehysVqyKSoAp8G3eoKgB9Yqu', 1, 1, 1, '2015-02-10 16:12:17.889878', '2015-02-10 16:12:17.889878')
   [1m[36m (36.0ms)[0m  [1mCOMMIT[0m
+  [1m[36m (288.2ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (1605.4ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (87.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateStudents (20150128160251)
+  [1m[35m (401.5ms)[0m  CREATE TABLE `students` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `date_of_birth` date, `expected_year_of_graduation` int(11), `personal_image` varchar(255), `gender` varchar(255), `studying_year` varchar(255), `section_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (24.8ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160251')
+  [1m[36m (48.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateSubjects (20150128160300)
+  [1m[35m (105.5ms)[0m  CREATE TABLE `subjects` (`id` int(11) auto_increment PRIMARY KEY, `subject` varchar(255), `course_code` varchar(255), `studying_year` varchar(255), `instructor_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160300')
+  [1m[36m (28.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateInstructors (20150128160308)
+  [1m[35m (182.1ms)[0m  CREATE TABLE `instructors` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `gender` varchar(255), `role` varchar(255) DEFAULT 'instructor', `personal_image` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (33.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160308')
+  [1m[36m (122.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateAdmins (20150128160327)
+  [1m[35m (232.1ms)[0m  CREATE TABLE `admins` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `gender` varchar(255), `admin_authority` tinyint(1), `reply_msg_authority` tinyint(1), `add_authority` tinyint(1), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (7.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160327')
+  [1m[36m (31.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreateQuizzes (20150128160402)
+  [1m[35m (79.4ms)[0m  CREATE TABLE `quizzes` (`id` int(11) auto_increment PRIMARY KEY, `duration` time, `quiz_title` varchar(255), `time_to_be_published` datetime, `average_degree` int(11), `quiz_mark` int(11), `instructor_id` int(11), `subject_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160402')
+  [1m[36m (30.2ms)[0m  [1mCOMMIT[0m
+Migrating to CreateMcqs (20150128220300)
+  [1m[35m (89.2ms)[0m  CREATE TABLE `mcqs` (`id` int(11) auto_increment PRIMARY KEY, `question` varchar(255), `choice1` varchar(255), `choice2` varchar(255), `choice3` varchar(255), `choice4` varchar(255), `question_mark` int(11), `bonus` tinyint(1) DEFAULT 0, `explanation` text, `hint` tinyint(1) DEFAULT 0, `hint_sentence` text, `hint_discounted_mark` int(11) DEFAULT 0, `answer` varchar(255), `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.6ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128220300')
+  [1m[36m (28.1ms)[0m  [1mCOMMIT[0m
+Migrating to CreateTextSentences (20150128220352)
+  [1m[35m (89.9ms)[0m  CREATE TABLE `text_sentences` (`id` int(11) auto_increment PRIMARY KEY, `text_sentence` text, `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (20.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128220352')
+  [1m[36m (43.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateNumericalQuestions (20150128220417)
+  [1m[35m (56.9ms)[0m  CREATE TABLE `numerical_questions` (`id` int(11) auto_increment PRIMARY KEY, `question` varchar(255), `question_mark` int(11), `bonus` tinyint(1) DEFAULT 0, `explanation` text, `hint` tinyint(1) DEFAULT 0, `hint_sentence` text, `hint_discounted_mark` int(11), `answer` int(11), `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (45.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128220417')
+  [1m[36m (60.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreateTrueOrFalseQuestions (20150128220436)
+  [1m[35m (111.0ms)[0m  CREATE TABLE `true_or_false_questions` (`id` int(11) auto_increment PRIMARY KEY, `question_mark` int(11), `bonus` tinyint(1), `explanation` text, `hint` tinyint(1), `hint_sentence` text, `hint_discounted_mark` int(11), `answer` tinyint(1), `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128220436')
+  [1m[36m (29.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateStudentQuizzes (20150129034220)
+  [1m[36mActiveRecord::SchemaMigration Load (5.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateStudentQuizzes (20150129034220)
