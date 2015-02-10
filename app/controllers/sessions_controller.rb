@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+
   before_action :authenticate_any! , :except => :create
   
 
@@ -14,7 +15,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    # expire auth token
+
     if student_signed_in?
       user = Student.where(:authentication_token => params[:auth_token]).first
     elsif instructor_signed_in?

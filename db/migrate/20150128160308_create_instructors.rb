@@ -4,7 +4,7 @@ class CreateInstructors < ActiveRecord::Migration
 
       t.string :name
       t.string :gender
-      t.string :role
+      t.string :role , default: "instructor"
       t.string :personal_image
 
       t.timestamps null: false

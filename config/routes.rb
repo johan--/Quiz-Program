@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :quizzes
+
 
   devise_for :admins , :controllers => {sessions:'sessions'}
   devise_for :instructors , :controllers => {sessions:'sessions'}
@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   match ':controller(/:action)' , :via => :get 
 
   resources :instructors
+
+  resources :quizzes
 
   resources :students
 

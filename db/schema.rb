@@ -17,11 +17,8 @@ ActiveRecord::Schema.define(version: 20150209042619) do
     t.string   "name",                   limit: 255
     t.string   "gender",                 limit: 255
     t.boolean  "admin_authority",        limit: 1
-    t.boolean  "instructor_authority",   limit: 1
-    t.boolean  "department_authority",   limit: 1
-    t.boolean  "subject_authority",      limit: 1
     t.boolean  "reply_msg_authority",    limit: 1
-    t.boolean  "student_authority",      limit: 1
+    t.boolean  "add_authority",          limit: 1
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "email",                  limit: 255, default: "", null: false
@@ -51,16 +48,16 @@ ActiveRecord::Schema.define(version: 20150209042619) do
   create_table "instructors", force: :cascade do |t|
     t.string   "name",                   limit: 255
     t.string   "gender",                 limit: 255
-    t.string   "role",                   limit: 255
+    t.string   "role",                   limit: 255, default: "instructor"
     t.string   "personal_image",         limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
+    t.string   "email",                  limit: 255, default: "",           null: false
+    t.string   "encrypted_password",     limit: 255, default: "",           null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,            null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
@@ -78,24 +75,29 @@ ActiveRecord::Schema.define(version: 20150209042619) do
   end
 
   create_table "mcq_answers", force: :cascade do |t|
-    t.string   "student_answer", limit: 255
+    t.integer  "student_answer", limit: 4
     t.integer  "student_id",     limit: 4
     t.integer  "mcq_id",         limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "mcqs", force: :cascade do |t|
+    t.string   "question",             limit: 255
+    t.string   "choice1",              limit: 255
+    t.string   "choice2",              limit: 255
+    t.string   "choice3",              limit: 255
+    t.string   "choice4",              limit: 255
     t.integer  "question_mark",        limit: 4
-    t.boolean  "bonus",                limit: 1
+    t.boolean  "bonus",                limit: 1,     default: false
     t.text     "explanation",          limit: 65535
-    t.boolean  "hint",                 limit: 1
+    t.boolean  "hint",                 limit: 1,     default: false
     t.text     "hint_sentence",        limit: 65535
-    t.integer  "hint_discounted_mark", limit: 4
+    t.integer  "hint_discounted_mark", limit: 4,     default: 0
     t.string   "answer",               limit: 255
     t.integer  "quiz_id",              limit: 4
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   create_table "numerical_answers", force: :cascade do |t|
@@ -107,16 +109,17 @@ ActiveRecord::Schema.define(version: 20150209042619) do
   end
 
   create_table "numerical_questions", force: :cascade do |t|
+    t.string   "question",             limit: 255
     t.integer  "question_mark",        limit: 4
-    t.boolean  "bonus",                limit: 1
+    t.boolean  "bonus",                limit: 1,     default: false
     t.text     "explanation",          limit: 65535
-    t.boolean  "hint",                 limit: 1
+    t.boolean  "hint",                 limit: 1,     default: false
     t.text     "hint_sentence",        limit: 65535
     t.integer  "hint_discounted_mark", limit: 4
     t.integer  "answer",               limit: 4
     t.integer  "quiz_id",              limit: 4
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   create_table "quiz_marks", force: :cascade do |t|
@@ -128,12 +131,13 @@ ActiveRecord::Schema.define(version: 20150209042619) do
   end
 
   create_table "quizzes", force: :cascade do |t|
-    t.time     "time_to_solve_the_quiz"
+    t.time     "duration"
+    t.string   "quiz_title",           limit: 255
     t.datetime "time_to_be_published"
-    t.integer  "average_degree",         limit: 4
-    t.integer  "quiz_mark",              limit: 4
-    t.integer  "instructor_id",          limit: 4
-    t.integer  "subject_id",             limit: 4
+    t.integer  "average_degree",       limit: 4
+    t.integer  "quiz_mark",            limit: 4
+    t.integer  "instructor_id",        limit: 4
+    t.integer  "subject_id",           limit: 4
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end
@@ -143,7 +147,6 @@ ActiveRecord::Schema.define(version: 20150209042619) do
     t.date     "date_of_birth"
     t.integer  "expected_year_of_graduation", limit: 4
     t.string   "personal_image",              limit: 255
-    t.integer  "section_number",              limit: 4
     t.string   "gender",                      limit: 255
     t.string   "studying_year",               limit: 255
     t.datetime "created_at",                                           null: false

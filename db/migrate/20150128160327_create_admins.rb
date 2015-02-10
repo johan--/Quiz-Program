@@ -5,11 +5,8 @@ class CreateAdmins < ActiveRecord::Migration
       t.string :name
       t.string :gender 
       t.boolean :admin_authority
-      t.boolean :instructor_authority
-      t.boolean :department_authority
-      t.boolean :subject_authority
       t.boolean :reply_msg_authority
-      t.boolean :student_authority
+      t.boolean :add_authority  # add instructor, department, subject and student 
 
       t.timestamps null: false
 

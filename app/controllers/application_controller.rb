@@ -4,6 +4,14 @@ class ApplicationController < ActionController::Base
 
 
   protected
+
+    def authenticate_student_or_instructor!
+      if student_signed_in?
+        authenticate_student!
+      elsif instructor_signed_in?
+        authenticate_instructor!
+
+    end
   
   	def authenticate_any!
   		if student_signed_in?

@@ -1,0 +1,701 @@
+  [1m[36m (67.4ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (212.6ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateStudents (20150128160251)
+  [1m[35m (106.1ms)[0m  CREATE TABLE `students` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `date_of_birth` date, `expected_year_of_graduation` int(11), `personal_image` varchar(255), `gender` varchar(255), `studying_year` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160251')
+  [1m[36m (40.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateSubjects (20150128160300)
+  [1m[35m (87.3ms)[0m  CREATE TABLE `subjects` (`id` int(11) auto_increment PRIMARY KEY, `subject` varchar(255), `course_code` varchar(255), `studying_year` varchar(255), `instructor_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160300')
+  [1m[36m (41.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateInstructors (20150128160308)
+  [1m[35m (77.7ms)[0m  CREATE TABLE `instructors` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `gender` varchar(255), `role` varchar(255) DEFAULT 'instructor', `personal_image` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160308')
+  [1m[36m (31.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateAdmins (20150128160327)
+  [1m[35m (65.7ms)[0m  CREATE TABLE `admins` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `gender` varchar(255), `admin_authority` tinyint(1), `reply_msg_authority` tinyint(1), `add_authority` tinyint(1), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160327')
+  [1m[36m (29.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateQuizzes (20150128160402)
+  [1m[35m (66.9ms)[0m  CREATE TABLE `quizzes` (`id` int(11) auto_increment PRIMARY KEY, `duration` time, `quiz_title` varchar(255), `time_to_be_published` datetime, `average_degree` int(11), `quiz_mark` int(11), `instructor_id` int(11), `subject_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160402')
+  [1m[36m (51.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateDepartments (20150128160421)
+  [1m[35m (121.7ms)[0m  CREATE TABLE `departments` (`id` int(11) auto_increment PRIMARY KEY, `department_name` varchar(255), `begin_year` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160421')
+  [1m[36m (40.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateMcqs (20150128220300)
+  [1m[36m (87.7ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (201.3ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateStudents (20150128160251)
+  [1m[35m (95.3ms)[0m  CREATE TABLE `students` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `date_of_birth` date, `expected_year_of_graduation` int(11), `personal_image` varchar(255), `gender` varchar(255), `studying_year` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160251')
+  [1m[36m (37.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreateSubjects (20150128160300)
+  [1m[35m (66.7ms)[0m  CREATE TABLE `subjects` (`id` int(11) auto_increment PRIMARY KEY, `subject` varchar(255), `course_code` varchar(255), `studying_year` varchar(255), `instructor_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160300')
+  [1m[36m (31.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateInstructors (20150128160308)
+  [1m[35m (77.1ms)[0m  CREATE TABLE `instructors` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `gender` varchar(255), `role` varchar(255) DEFAULT 'instructor', `personal_image` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160308')
+  [1m[36m (42.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateAdmins (20150128160327)
+  [1m[35m (65.3ms)[0m  CREATE TABLE `admins` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `gender` varchar(255), `admin_authority` tinyint(1), `reply_msg_authority` tinyint(1), `add_authority` tinyint(1), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160327')
+  [1m[36m (40.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateQuizzes (20150128160402)
+  [1m[35m (99.6ms)[0m  CREATE TABLE `quizzes` (`id` int(11) auto_increment PRIMARY KEY, `duration` time, `quiz_title` varchar(255), `time_to_be_published` datetime, `average_degree` int(11), `quiz_mark` int(11), `instructor_id` int(11), `subject_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160402')
+  [1m[36m (41.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateDepartments (20150128160421)
+  [1m[35m (88.0ms)[0m  CREATE TABLE `departments` (`id` int(11) auto_increment PRIMARY KEY, `department_name` varchar(255), `begin_year` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128160421')
+  [1m[36m (41.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreateMcqs (20150128220300)
+  [1m[35m (65.8ms)[0m  CREATE TABLE `mcqs` (`id` int(11) auto_increment PRIMARY KEY, `question` varchar(255), `choice1` varchar(255), `choice2` varchar(255), `choice3` varchar(255), `choice4` varchar(255), `question_mark` int(11), `bonus` tinyint(1) DEFAULT 0, `explanation` text, `hint` tinyint(1) DEFAULT 0, `hint_sentence` text, `hint_discounted_mark` int(11) DEFAULT 0, `answer` varchar(255), `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128220300')
+  [1m[36m (32.2ms)[0m  [1mCOMMIT[0m
+Migrating to CreateTextSentences (20150128220352)
+  [1m[35m (90.0ms)[0m  CREATE TABLE `text_sentences` (`id` int(11) auto_increment PRIMARY KEY, `text_sentence` text, `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128220352')
+  [1m[36m (40.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateNumericalQuestions (20150128220417)
+  [1m[35m (75.9ms)[0m  CREATE TABLE `numerical_questions` (`id` int(11) auto_increment PRIMARY KEY, `question` varchar(255), `question_mark` int(11), `bonus` tinyint(1) DEFAULT 0, `explanation` text, `hint` tinyint(1) DEFAULT 0, `hint_sentence` text, `hint_discounted_mark` int(11), `answer` int(11), `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128220417')
+  [1m[36m (42.1ms)[0m  [1mCOMMIT[0m
+Migrating to CreateTrueOrFalseQuestions (20150128220436)
+  [1m[35m (77.4ms)[0m  CREATE TABLE `true_or_false_questions` (`id` int(11) auto_increment PRIMARY KEY, `question_mark` int(11), `bonus` tinyint(1), `explanation` text, `hint` tinyint(1), `hint_sentence` text, `hint_discounted_mark` int(11), `answer` tinyint(1), `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150128220436')
+  [1m[36m (42.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateQuizMarks (20150129034220)
+  [1m[35m (77.1ms)[0m  CREATE TABLE `quiz_marks` (`id` int(11) auto_increment PRIMARY KEY, `student_quiz_mark` int(11), `student_id` int(11), `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150129034220')
+  [1m[36m (42.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateMcqAnswers (20150129035841)
+  [1m[35m (88.8ms)[0m  CREATE TABLE `mcq_answers` (`id` int(11) auto_increment PRIMARY KEY, `student_answer` int(11), `student_id` int(11), `mcq_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150129035841')
+  [1m[36m (40.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateTrueOrFalseAnswers (20150129035907)
+  [1m[35m (77.6ms)[0m  CREATE TABLE `true_or_false_answers` (`id` int(11) auto_increment PRIMARY KEY, `student_answer` tinyint(1), `true_or_false_question_id` int(11), `student_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150129035907')
+  [1m[36m (31.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateNumericalAnswers (20150129035921)
+  [1m[35m (67.0ms)[0m  CREATE TABLE `numerical_answers` (`id` int(11) auto_increment PRIMARY KEY, `student_answer` int(11), `student_id` int(11), `numerical_question_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150129035921')
+  [1m[36m (31.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateInstructorsStudentsJoin (20150129041425)
+  [1m[35m (90.9ms)[0m  CREATE TABLE `instructors_students` (`instructor_id` int(11), `student_id` int(11)) ENGINE=InnoDB
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150129041425')
+  [1m[36m (32.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreateStudentsSubjectsJoin (20150129145438)
+  [1m[35m (65.7ms)[0m  CREATE TABLE `students_subjects` (`student_id` int(11), `subject_id` int(11)) ENGINE=InnoDB
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150129145438')
+  [1m[36m (41.5ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToStudents (20150205224045)
+  [1m[35m (212.6ms)[0m  ALTER TABLE `students` ADD `email` varchar(255) DEFAULT '' NOT NULL
+  [1m[36m (179.8ms)[0m  [1mALTER TABLE `students` ADD `encrypted_password` varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35m (171.4ms)[0m  ALTER TABLE `students` ADD `reset_password_token` varchar(255)
+  [1m[36m (213.6ms)[0m  [1mALTER TABLE `students` ADD `reset_password_sent_at` datetime[0m
+  [1m[35m (213.8ms)[0m  ALTER TABLE `students` ADD `remember_created_at` datetime
+  [1m[36m (169.2ms)[0m  [1mALTER TABLE `students` ADD `sign_in_count` int(11) DEFAULT 0 NOT NULL[0m
+  [1m[35m (182.1ms)[0m  ALTER TABLE `students` ADD `current_sign_in_at` datetime
+  [1m[36m (225.4ms)[0m  [1mALTER TABLE `students` ADD `last_sign_in_at` datetime[0m
+  [1m[35m (169.4ms)[0m  ALTER TABLE `students` ADD `current_sign_in_ip` varchar(255)
+  [1m[36m (180.5ms)[0m  [1mALTER TABLE `students` ADD `last_sign_in_ip` varchar(255)[0m
+  [1m[35m (226.6ms)[0m  ALTER TABLE `students` ADD `authentication_token` varchar(255)
+  [1m[36m (133.3ms)[0m  [1mCREATE UNIQUE INDEX `index_students_on_email`  ON `students` (`email`) [0m
+  [1m[35m (144.0ms)[0m  CREATE UNIQUE INDEX `index_students_on_reset_password_token`  ON `students` (`reset_password_token`) 
+  [1m[36m (155.6ms)[0m  [1mCREATE UNIQUE INDEX `index_students_on_authentication_token`  ON `students` (`authentication_token`) [0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150205224045')[0m
+  [1m[35m (43.4ms)[0m  COMMIT
+Migrating to AddDeviseToInstructors (20150209042610)
+  [1m[36m (190.8ms)[0m  [1mALTER TABLE `instructors` ADD `email` varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35m (168.9ms)[0m  ALTER TABLE `instructors` ADD `encrypted_password` varchar(255) DEFAULT '' NOT NULL
+  [1m[36m (170.7ms)[0m  [1mALTER TABLE `instructors` ADD `reset_password_token` varchar(255)[0m
+  [1m[35m (236.3ms)[0m  ALTER TABLE `instructors` ADD `reset_password_sent_at` datetime
+  [1m[36m (168.9ms)[0m  [1mALTER TABLE `instructors` ADD `remember_created_at` datetime[0m
+  [1m[35m (169.0ms)[0m  ALTER TABLE `instructors` ADD `sign_in_count` int(11) DEFAULT 0 NOT NULL
+  [1m[36m (225.4ms)[0m  [1mALTER TABLE `instructors` ADD `current_sign_in_at` datetime[0m
+  [1m[35m (181.9ms)[0m  ALTER TABLE `instructors` ADD `last_sign_in_at` datetime
+  [1m[36m (169.0ms)[0m  [1mALTER TABLE `instructors` ADD `current_sign_in_ip` varchar(255)[0m
+  [1m[35m (225.3ms)[0m  ALTER TABLE `instructors` ADD `last_sign_in_ip` varchar(255)
+  [1m[36m (226.1ms)[0m  [1mALTER TABLE `instructors` ADD `authentication_token` varchar(255)[0m
+  [1m[35m (135.6ms)[0m  CREATE UNIQUE INDEX `index_instructors_on_email`  ON `instructors` (`email`) 
+  [1m[36m (133.2ms)[0m  [1mCREATE UNIQUE INDEX `index_instructors_on_reset_password_token`  ON `instructors` (`reset_password_token`) [0m
+  [1m[35m (168.3ms)[0m  CREATE UNIQUE INDEX `index_instructors_on_authentication_token`  ON `instructors` (`authentication_token`) 
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150209042610')
+  [1m[36m (44.0ms)[0m  [1mCOMMIT[0m
+Migrating to AddDeviseToAdmins (20150209042619)
+  [1m[35m (169.9ms)[0m  ALTER TABLE `admins` ADD `email` varchar(255) DEFAULT '' NOT NULL
+  [1m[36m (180.4ms)[0m  [1mALTER TABLE `admins` ADD `encrypted_password` varchar(255) DEFAULT '' NOT NULL[0m
+  [1m[35m (213.9ms)[0m  ALTER TABLE `admins` ADD `reset_password_token` varchar(255)
+  [1m[36m (169.3ms)[0m  [1mALTER TABLE `admins` ADD `reset_password_sent_at` datetime[0m
+  [1m[35m (170.8ms)[0m  ALTER TABLE `admins` ADD `remember_created_at` datetime
+  [1m[36m (224.7ms)[0m  [1mALTER TABLE `admins` ADD `sign_in_count` int(11) DEFAULT 0 NOT NULL[0m
+  [1m[35m (180.2ms)[0m  ALTER TABLE `admins` ADD `current_sign_in_at` datetime
+  [1m[36m (169.2ms)[0m  [1mALTER TABLE `admins` ADD `last_sign_in_at` datetime[0m
+  [1m[35m (259.8ms)[0m  ALTER TABLE `admins` ADD `current_sign_in_ip` varchar(255)
+  [1m[36m (202.4ms)[0m  [1mALTER TABLE `admins` ADD `last_sign_in_ip` varchar(255)[0m
+  [1m[35m (169.2ms)[0m  ALTER TABLE `admins` ADD `authentication_token` varchar(255)
+  [1m[36m (155.1ms)[0m  [1mCREATE UNIQUE INDEX `index_admins_on_email`  ON `admins` (`email`) [0m
+  [1m[35m (167.5ms)[0m  CREATE UNIQUE INDEX `index_admins_on_reset_password_token`  ON `admins` (`reset_password_token`) 
+  [1m[36m (134.8ms)[0m  [1mCREATE UNIQUE INDEX `index_admins_on_authentication_token`  ON `admins` (`authentication_token`) [0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (89.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150209042619')[0m
+  [1m[35m (156.9ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'admins'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `admins`[0m
+  [1m[35m (0.4ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'departments'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `departments`[0m
+  [1m[35m (0.3ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'instructors'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `instructors`[0m
+  [1m[35m (0.4ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'instructors_students'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `instructors_students`[0m
+  [1m[35m (0.5ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'mcq_answers'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `mcq_answers`[0m
+  [1m[35m (0.4ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'mcqs'
+
+  [1m[36m (0.3ms)[0m  [1mSHOW CREATE TABLE `mcqs`[0m
+  [1m[35m (0.4ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'numerical_answers'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `numerical_answers`[0m
+  [1m[35m (0.5ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'numerical_questions'
+
+  [1m[36m (0.3ms)[0m  [1mSHOW CREATE TABLE `numerical_questions`[0m
+  [1m[35m (0.4ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'quiz_marks'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `quiz_marks`[0m
+  [1m[35m (0.3ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'quizzes'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `quizzes`[0m
+  [1m[35m (0.6ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'students'
+
+  [1m[36m (0.3ms)[0m  [1mSHOW CREATE TABLE `students`[0m
+  [1m[35m (0.5ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'students_subjects'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `students_subjects`[0m
+  [1m[35m (0.4ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'subjects'
+
+  [1m[36m (0.2ms)[0m  [1mSHOW CREATE TABLE `subjects`[0m
+  [1m[35m (0.4ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'text_sentences'
+
+  [1m[36m (0.3ms)[0m  [1mSHOW CREATE TABLE `text_sentences`[0m
+  [1m[35m (0.3ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'true_or_false_answers'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `true_or_false_answers`[0m
+  [1m[35m (0.3ms)[0m  SELECT fk.referenced_table_name as 'to_table'
+      ,fk.referenced_column_name as 'primary_key'
+      ,fk.column_name as 'column'
+      ,fk.constraint_name as 'name'
+FROM information_schema.key_column_usage fk
+WHERE fk.referenced_column_name is not null
+  AND fk.table_schema = 'takeAQuiz_development'
+  AND fk.table_name = 'true_or_false_questions'
+
+  [1m[36m (0.1ms)[0m  [1mSHOW CREATE TABLE `true_or_false_questions`[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.8ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.5ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'arwasoliman@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.5ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'ramyfarid@gmail.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'raymonmina@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.5ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'reemmedhat@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `instructors` (`name`, `email`, `gender`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Dr.Cherif Salama', 'cherifsalama@gmail.com', 'male', '$2a$10$K.MO3XvVOyS2fxhwwdCzb.B41nq.secza5IrYKzIOAYRZdy0EfQTe', '2015-02-10 16:05:27.445549', '2015-02-10 16:05:27.445549')
+  [1m[36m (59.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'bassemamin@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `instructors` (`name`, `email`, `gender`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Dr.Bassem Amin', 'bassemamin@gmail.com', 'male', '$2a$10$500YxVbKfjUlItBzahvjkejn6C9pZ1g4kanchFduch.yOVWLiLuP.', '2015-02-10 16:05:27.646019', '2015-02-10 16:05:27.646019')
+  [1m[36m (115.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'gamal@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `instructors` (`name`, `email`, `gender`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Dr.Gamal', 'gamal@gmail.com', 'male', '$2a$10$tpw8o4XotBdpmW5rvfgqfOWlRMw7tSGqvHu0i2RWFBlolptUQ7mta', '2015-02-10 16:05:27.901841', '2015-02-10 16:05:27.901841')
+  [1m[36m (37.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'seif@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `instructors` (`name`, `email`, `gender`, `role`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Dr.Seif', 'seif@gmail.com', 'male', 'department manager', '$2a$10$Tplymig67ecUJ6AxuuXbFOVebije50NO0BwLIqaCrp8/wWvHqahZq', '2015-02-10 16:05:28.079850', '2015-02-10 16:05:28.079850')
+  [1m[36m (59.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'makram@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `instructors` (`name`, `email`, `gender`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Dr.Makram', 'makram@gmail.com', 'male', '$2a$10$Z/ouMtFzNsNpVR4ft3HIY.piBMe2Ued4gLC.yrtslJWjHGokOSdPS', '2015-02-10 16:05:28.283430', '2015-02-10 16:05:28.283430')
+  [1m[36m (45.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'rabab@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `instructors` (`name`, `email`, `gender`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Dr.Rabab', 'rabab@gmail.com', 'female', '$2a$10$FoTzZTpsMKgCbxWsiPJpCONPsQaVKzt6ZUtOaG/AE4PSLolLj5WH.', '2015-02-10 16:05:28.469441', '2015-02-10 16:05:28.469441')
+  [1m[36m (226.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'hussein@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `instructors` (`name`, `email`, `gender`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Dr.Hussein', 'hussein@gmail.com', 'male', '$2a$10$J4wRUK2tEq.I5BWHXZya3OySqCaRnBaCUBXngaLXs99ZLH93rw9YK', '2015-02-10 16:05:28.841356', '2015-02-10 16:05:28.841356')
+  [1m[36m (44.1ms)[0m  [1mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.3ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'arwasoliman@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.3ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'ramyfarid@gmail.com' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'raymonmina@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.3ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'reemmedhat@gmail.com' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.8ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.6ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'bassemamin@gmail.com' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'gamal@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.6ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'seif@gmail.com' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'makram@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.6ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'rabab@gmail.com' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.6ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'hussein@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.2ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'arwasoliman@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.1ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'ramyfarid@gmail.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'raymonmina@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.2ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'reemmedhat@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.2ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'bassemamin@gmail.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'gamal@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.2ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'seif@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'makram@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.2ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'rabab@gmail.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'hussein@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.3ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'arwasoliman@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.2ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'ramyfarid@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'raymonmina@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.2ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'reemmedhat@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.2ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'bassemamin@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'gamal@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.3ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'seif@gmail.com' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'makram@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.3ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'rabab@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'hussein@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.3ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'arwasoliman@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.3ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'ramyfarid@gmail.com' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'raymonmina@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.2ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'reemmedhat@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.3ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'bassemamin@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'gamal@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.2ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'seif@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'makram@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.2ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'rabab@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'hussein@gmail.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'fadyfares@gmail.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.2ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'arwasoliman@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.1ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'ramyfarid@gmail.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mStudent Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'raymonmina@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mStudent Exists (0.1ms)[0m  SELECT  1 AS one FROM `students` WHERE `students`.`email` = BINARY 'reemmedhat@gmail.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.1ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'bassemamin@gmail.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'gamal@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.1ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'seif@gmail.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'makram@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mInstructor Exists (0.1ms)[0m  SELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'rabab@gmail.com' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mInstructor Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM `instructors` WHERE `instructors`.`email` = BINARY 'hussein@gmail.com' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO `quizzes` (`quiz_mark`, `duration`, `time_to_be_published`, `average_degree`, `created_at`, `updated_at`) VALUES (25, '2000-01-01 02:00:00.000000', '2016-02-03 12:00:00.000000', 13, '2015-02-10 16:12:16.355374', '2015-02-10 16:12:16.355374')
+  [1m[36m (52.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO `quizzes` (`quiz_mark`, `duration`, `time_to_be_published`, `created_at`, `updated_at`) VALUES (30, '2000-01-01 03:00:00.000000', '2015-03-02 12:00:00.000000', '2015-02-10 16:12:16.430128', '2015-02-10 16:12:16.430128')[0m
+  [1m[35m (36.8ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `quizzes` (`quiz_mark`, `duration`, `time_to_be_published`, `created_at`, `updated_at`) VALUES (30, '2000-01-01 01:00:00.000000', '2015-03-30 10:00:00.000000', '2015-02-10 16:12:16.474750', '2015-02-10 16:12:16.474750')
+  [1m[36m (37.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO `quizzes` (`quiz_mark`, `duration`, `time_to_be_published`, `created_at`, `updated_at`) VALUES (20, '2000-01-01 00:30:00.000000', '2015-04-30 15:00:00.000000', '2015-02-10 16:12:16.517602', '2015-02-10 16:12:16.517602')[0m
+  [1m[35m (38.3ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `quizzes` (`quiz_mark`, `duration`, `time_to_be_published`, `created_at`, `updated_at`) VALUES (15, '2000-01-01 00:20:00.000000', '2015-05-30 18:00:00.000000', '2015-02-10 16:12:16.564472', '2015-02-10 16:12:16.564472')
+  [1m[36m (36.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `text_sentences` (`text_sentence`, `created_at`, `updated_at`) VALUES ('text1', '2015-02-10 16:12:16.617238', '2015-02-10 16:12:16.617238')[0m
+  [1m[35m (42.5ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `text_sentences` (`text_sentence`, `created_at`, `updated_at`) VALUES ('text2', '2015-02-10 16:12:16.663495', '2015-02-10 16:12:16.663495')
+  [1m[36m (39.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO `text_sentences` (`text_sentence`, `created_at`, `updated_at`) VALUES ('text3', '2015-02-10 16:12:16.708913', '2015-02-10 16:12:16.708913')[0m
+  [1m[35m (39.0ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `text_sentences` (`text_sentence`, `created_at`, `updated_at`) VALUES ('text4', '2015-02-10 16:12:16.753640', '2015-02-10 16:12:16.753640')
+  [1m[36m (39.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO `text_sentences` (`text_sentence`, `created_at`, `updated_at`) VALUES ('text5', '2015-02-10 16:12:16.798046', '2015-02-10 16:12:16.798046')[0m
+  [1m[35m (39.0ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `subjects` (`subject`, `course_code`, `studying_year`, `created_at`, `updated_at`) VALUES ('math1', 'M1', 'primary', '2015-02-10 16:12:16.861787', '2015-02-10 16:12:16.861787')
+  [1m[36m (44.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO `subjects` (`subject`, `course_code`, `studying_year`, `created_at`, `updated_at`) VALUES ('control', 'CON3', 'third', '2015-02-10 16:12:16.911175', '2015-02-10 16:12:16.911175')[0m
+  [1m[35m (38.5ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `subjects` (`subject`, `course_code`, `studying_year`, `created_at`, `updated_at`) VALUES ('CO', 'CO2', 'second', '2015-02-10 16:12:16.954395', '2015-02-10 16:12:16.954395')
+  [1m[36m (41.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `subjects` (`subject`, `course_code`, `studying_year`, `created_at`, `updated_at`) VALUES ('Data communication', 'DA3', 'third', '2015-02-10 16:12:16.999054', '2015-02-10 16:12:16.999054')[0m
+  [1m[35m (41.6ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `subjects` (`subject`, `course_code`, `studying_year`, `created_at`, `updated_at`) VALUES ('testing', 'TES3', 'third', '2015-02-10 16:12:17.043876', '2015-02-10 16:12:17.043876')
+  [1m[36m (41.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `subjects` (`subject`, `course_code`, `studying_year`, `created_at`, `updated_at`) VALUES ('math2', 'M2', 'first', '2015-02-10 16:12:17.088711', '2015-02-10 16:12:17.088711')[0m
+  [1m[35m (41.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `subjects` (`subject`, `course_code`, `studying_year`, `created_at`, `updated_at`) VALUES ('embedded systems', 'EM4', 'fourth', '2015-02-10 16:12:17.133327', '2015-02-10 16:12:17.133327')
+  [1m[36m (43.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `mcq_answers` (`student_answer`, `created_at`, `updated_at`) VALUES (0, '2015-02-10 16:12:17.256509', '2015-02-10 16:12:17.256509')[0m
+  [1m[35m (32.3ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `mcq_answers` (`student_answer`, `created_at`, `updated_at`) VALUES (0, '2015-02-10 16:12:17.292608', '2015-02-10 16:12:17.292608')
+  [1m[36m (39.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `mcq_answers` (`student_answer`, `created_at`, `updated_at`) VALUES (0, '2015-02-10 16:12:17.337394', '2015-02-10 16:12:17.337394')[0m
+  [1m[35m (39.5ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `mcq_answers` (`student_answer`, `created_at`, `updated_at`) VALUES (0, '2015-02-10 16:12:17.382518', '2015-02-10 16:12:17.382518')
+  [1m[36m (61.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `mcq_answers` (`student_answer`, `created_at`, `updated_at`) VALUES (0, '2015-02-10 16:12:17.449510', '2015-02-10 16:12:17.449510')[0m
+  [1m[35m (38.2ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO `quiz_marks` (`student_quiz_mark`, `created_at`, `updated_at`) VALUES (11, '2015-02-10 16:12:17.542369', '2015-02-10 16:12:17.542369')
+  [1m[36m (36.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `quiz_marks` (`student_quiz_mark`, `created_at`, `updated_at`) VALUES (20, '2015-02-10 16:12:17.582551', '2015-02-10 16:12:17.582551')[0m
+  [1m[35m (31.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `quiz_marks` (`student_quiz_mark`, `created_at`, `updated_at`) VALUES (20, '2015-02-10 16:12:17.616286', '2015-02-10 16:12:17.616286')
+  [1m[36m (31.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `quiz_marks` (`student_quiz_mark`, `created_at`, `updated_at`) VALUES (20, '2015-02-10 16:12:17.649986', '2015-02-10 16:12:17.649986')[0m
+  [1m[35m (31.3ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `quiz_marks` (`student_quiz_mark`, `created_at`, `updated_at`) VALUES (20, '2015-02-10 16:12:17.684839', '2015-02-10 16:12:17.684839')
+  [1m[36m (39.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mAdmin Exists (0.7ms)[0m  [1mSELECT  1 AS one FROM `admins` WHERE `admins`.`email` = BINARY 'admin1@gmail.com' LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `admins` (`name`, `gender`, `email`, `encrypted_password`, `admin_authority`, `reply_msg_authority`, `add_authority`, `created_at`, `updated_at`) VALUES ('admin1', 'male', 'admin1@gmail.com', '$2a$10$9rZlhVlH7WZgbyZSxMquFuR/olj1YehysVqyKSoAp8G3eoKgB9Yqu', 1, 1, 1, '2015-02-10 16:12:17.889878', '2015-02-10 16:12:17.889878')
+  [1m[36m (36.0ms)[0m  [1mCOMMIT[0m

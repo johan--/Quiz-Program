@@ -1,21 +1,21 @@
 
 student1 = Student.create(name: "Fady Fares",email: "fadyfares@gmail.com",
- 	expected_year_of_graduation: 2019,studying_year: "primary", section_number: 38,
+ 	expected_year_of_graduation: 2019,studying_year: "primary",
  	gender: "male",password: "passStu1",date_of_birth: '1992-01-01' )
 student2 = Student.create(name: "Mohamed Ahmed",email: "mohamedahmed@gmail.com",
- 	expected_year_of_graduation: 2016,studying_year: "third", section_number: 2,
+ 	expected_year_of_graduation: 2016,studying_year: "third",
  	gender: "male",password: "passStu2",date_of_birth: '1992-11-06' )
 student3 = Student.create(name: "Arwa Soliman",email: "arwasoliman@gmail.com",
-	expected_year_of_graduation: 2016,studying_year: "third", section_number: 1,gender: "female",
+	expected_year_of_graduation: 2016,studying_year: "third",gender: "female",
  	password: "passStu3",date_of_birth: '1993-02-04')
 student4 = Student.create(name: "Ramy Farid",email: "ramyfarid@gmail.com",
-	expected_year_of_graduation: 2015,studying_year: "fourth", section_number: 8,gender: "male",
+	expected_year_of_graduation: 2015,studying_year: "fourth",gender: "male",
  	password: "passStu4",date_of_birth: '1992-01-03')
 student5 = Student.create(name: "Raymon Mina",email: "raymonmina@gmail.com",
-	expected_year_of_graduation: 2017,studying_year: "second", section_number: 5,gender: "male",
+	expected_year_of_graduation: 2017,studying_year: "second",gender: "male",
  	password: "passStu5",date_of_birth: '1992-01-05')
 student6 = Student.create(name: "Reem medhat",email: "reemmedhat@gmail.com",
-	expected_year_of_graduation: 2018,studying_year: "first", section_number: 5,gender: "female",
+	expected_year_of_graduation: 2018,studying_year: "first",gender: "female",
  	password: "passStu6",date_of_birth: '1992-01-05')
 
 instructor1 = Instructor.create(name: "Dr.Cherif Salama",email:"cherifSalama@gmail.com",
@@ -33,15 +33,15 @@ instructor6 = Instructor.create(name: "Dr.Rabab",email:"rabab@gmail.com",
 instructor7 = Instructor.create(name: "Dr.Hussein",email:"hussein@gmail.com",
 	gender: "male", role: "instructor",password: "passIns7")
 
-quiz1 = Quiz.create(quiz_mark: 25,time_to_solve_the_quiz:'02:00:00',
+quiz1 = Quiz.create(quiz_mark: 25,duration:'02:00:00',
 	time_to_be_published:'2016-02-03 12:00:00',average_degree: 13)
-quiz2 = Quiz.create(quiz_mark: 30,time_to_solve_the_quiz:'03:00:00',
+quiz2 = Quiz.create(quiz_mark: 30,duration:'03:00:00',
 	time_to_be_published:'2015-02-30 12:00:00')
-quiz3 = Quiz.create(quiz_mark: 30,time_to_solve_the_quiz:'01:00:00',
+quiz3 = Quiz.create(quiz_mark: 30,duration:'01:00:00',
 	time_to_be_published:'2015-03-30 10:00:00')
-quiz4 = Quiz.create(quiz_mark: 20,time_to_solve_the_quiz:'00:30:00',
+quiz4 = Quiz.create(quiz_mark: 20,duration:'00:30:00',
 	time_to_be_published:'2015-04-30 15:00:00')
-quiz5 = Quiz.create(quiz_mark: 15,time_to_solve_the_quiz:'00:20:00',
+quiz5 = Quiz.create(quiz_mark: 15,duration:'00:20:00',
 	time_to_be_published:'2015-05-30 18:00:00')
 
 text1 = TextSentence.create(text_sentence: "text1")
@@ -59,19 +59,19 @@ subject6 = Subject.create(subject: "math2",course_code:"M2",studying_year:"first
 subject7 = Subject.create(subject: "embedded systems",course_code:"EM4",studying_year:"fourth")
 
 mcq1 = Mcq.create(question_mark: 2,explanation: "exp1",hint: true,bonus: true,
-	hint_sentence: "hint1",hint_discounted_mark: 1,answer: "choice1")
+	hint_sentence: "hint1",hint_discounted_mark: 1,answer: 1)
 mcq2 = Mcq.create(question_mark: 1,explanation: "exp2",hint: false,bonus: true,
-	hint_sentence: "hint2",hint_discounted_mark: 1,answer: "choice2")
+	hint_sentence: "hint2",hint_discounted_mark: 1,answer: 2)
 mcq3 = Mcq.create(question_mark: 4,explanation: "exp3",hint: false,bonus: false,
-	hint_sentence: "hint3",hint_discounted_mark: 1,answer: "choice2")
+	hint_sentence: "hint3",hint_discounted_mark: 1,answer: 1)
 mcq4 = Mcq.create(question_mark: 3,explanation: "exp4",hint: false,bonus: false,
-	hint_sentence: "hint4",hint_discounted_mark: 1,answer: "choice3")
+	hint_sentence: "hint4",hint_discounted_mark: 1,answer: 2)
 mcq5 = Mcq.create(question_mark: 1,explanation: "exp5",hint: false,bonus: false,
-	hint_sentence: "hint5",hint_discounted_mark: 1,answer: "choice3")
+	hint_sentence: "hint5",hint_discounted_mark: 1,answer: 3)
 mcq6 = Mcq.create(question_mark: 1,explanation: "exp6",hint: true,bonus: false,
-	hint_sentence: "hint6",hint_discounted_mark: 2,answer: "choice2")
+	hint_sentence: "hint6",hint_discounted_mark: 2,answer: 2)
 mcq7 = Mcq.create(question_mark: 1,explanation: "exp7",hint: true,bonus: false,
-	hint_sentence: "hint7",hint_discounted_mark: 1,answer: "choice1")
+	hint_sentence: "hint7",hint_discounted_mark: 1,answer: 4)
 
 mcqAns1 = McqAnswer.create(student_answer: "choice1")
 mcqAns2 = McqAnswer.create(student_answer: "answer2")
@@ -92,7 +92,6 @@ quizM4 = QuizMark.create(student_quiz_mark: 20)
 quizM5 = QuizMark.create(student_quiz_mark: 20)
 
 admin1 = Admin.create(name: "admin1",gender: "male",email: "admin1@gmail.com", password: "passAd1",
-	admin_authority: true,instructor_authority: true,department_authority: true,
-	subject_authority: true,reply_msg_authority: true,student_authority: true )
+	admin_authority: true,reply_msg_authority: true,add_authority: true )
 
 

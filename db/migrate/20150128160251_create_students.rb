@@ -6,7 +6,6 @@ class CreateStudents < ActiveRecord::Migration
       t.date :date_of_birth
       t.integer :expected_year_of_graduation
       t.string :personal_image
-      t.integer :section_number
       t.string :gender
       t.string :studying_year
 

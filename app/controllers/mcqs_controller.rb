@@ -1,4 +1,5 @@
-class McqsController < ApplicationController
+class McqsController < ApplicationController\
+   
 	def create
 		params[mcq:].each do |mcq1|
    			Mcq.create(question_mark: mcq1[:question_mark], 

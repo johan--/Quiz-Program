@@ -1,4 +1,7 @@
 class Quiz < ActiveRecord::Base
+
+    ######################## Relations ########################
+    
 	belongs_to :subject
 	belongs_to :instructor
 	has_many :quiz_marks
@@ -7,11 +10,9 @@ class Quiz < ActiveRecord::Base
 	has_many :mcqs
 	has_many :text_sentences
 
-	scope :coming_quizzes, -> { order("time_to_be_published ASC").limit(5)}
-	# scope :previous_quizzes, -> {where(created_at: 7.days.ago..Time.now)}
 
-    validates :avg_degree, :numericality => true,
-    					   :inclusion => {:within => 0..quiz_mark}
+    # validates :average_degree, :numericality => true,
+    # 					   :inclusion => {:within => 0..quiz_mark}
 
     validates :quiz_mark, :presence => true,
     					  :numericality => true
@@ -25,6 +26,9 @@ class Quiz < ActiveRecord::Base
     end
 
 
+    
+    scope :coming_quizzes, -> { order("time_to_be_published ASC").limit(5)}
+    # scope :previous_quizzes, -> {where(created_at: 7.days.ago..Time.now)}
 
 
 end
