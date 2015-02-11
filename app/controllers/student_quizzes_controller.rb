@@ -25,21 +25,10 @@ class StudentQuizzesController < ApplicationController
   # POST /student_quizzes.json
   def create
 
-    # grading
-
-   # quiz_id1 is passed from the student mcq contoller #create
-    mcqs1 = Mcq.where(quiz_id: quiz_id1)
+    # quiz_id1,grade is passed from the student mcq contoller #create
+    # q[:g]and q[:quiz__id]
     
-    grade = 0
-
-    mcqs1.each do |mcq1|
-      if mcq1[:answer]==StudentMcq.where(student_id: current_student.id,
-                                         mcq_id: mcq1[:mcq_id])
-        grade = grade + mcq1[i][:question_mark]
-      end
-    end
-
-    StudentQuiz.create(student_quiz_mark: grade, student_id: current_student.id, quiz_id: quiz_id1)
+    StudentQuiz.create(student_quiz_mark: q[:g], student_id: current_student.id, quiz_id: q[:quiz_id])
 
 
   end
