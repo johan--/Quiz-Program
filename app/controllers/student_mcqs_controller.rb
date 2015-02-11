@@ -25,16 +25,16 @@ class StudentMcqsController < ApplicationController
   # POST /student_mcqs.json
   # BOSSSS HENAAAAAAAAAAAAAAAAAAA!!!!!!!!!!!!!!!!!!!!!!!!!
   def create
-    quiz_id1 = current_student_last_quiz
+    quiz_id1 = current_student_most_recent_quiz.id #m3rfsh most recent quiz di tetgab ezay 
     mcq_id1 = Mcq.where(quiz_id: quiz_id1)
 
     params[:answers].each_index do |i|   
       McqAnswer.create(student_answer: params[:answers][i],
                        mcq_id: mcq_id1[i],
-                       student_id: current_student_id)
+                       student_id: current_student.id)
     end
 
-     redirect_to controller: "StudentQuizzesController", action: "create"
+     redirect_to controller: "StudentQuizzesController", action: "create", quiz_id1
   end
 
   # PATCH/PUT /student_mcqs/1

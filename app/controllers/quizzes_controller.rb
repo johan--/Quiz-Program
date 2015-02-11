@@ -68,8 +68,12 @@ class QuizzesController < ApplicationController
           instructor_id: current_instructor[:instuctor_id],
           subject_id: Subject.find(course_code: params[:course_code]).subject_id)
 
-      redirect_to controller: "McqsController", action: "create"
-    quiz1.set_quiz_full_mark
+      redirect_to controller: "McqsController", action: "create", quiz1
+    
+  end
+
+  def set_fullmark
+      quiz1.set_quiz_full_mark
   end
 
   private

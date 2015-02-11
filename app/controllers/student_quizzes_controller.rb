@@ -27,25 +27,25 @@ class StudentQuizzesController < ApplicationController
 
     # grading
 
-    quiz_id1 = current_student_last_quiz #m3rfsh last quiz di tetgab ezay brdo
+   # quiz_id1 is passed from the student mcq contoller #create
     mcqs1 = Mcq.where(quiz_id: quiz_id1)
     
     grade = 0
 
     mcqs1.each do |mcq1|
-      if mcq1[:answer]==StudentMcq.where(student_id: current_student[:student_id],
+      if mcq1[:answer]==StudentMcq.where(student_id: current_student.id,
                                          mcq_id: mcq1[:mcq_id])
         grade = grade + mcq1[i][:question_mark]
       end
     end
 
-    StudentQuiz.create(student_quiz_mark: grade, student_id: current_student[:student_id], quiz_id: quiz_id1)
+    StudentQuiz.create(student_quiz_mark: grade, student_id: current_student.id, quiz_id: quiz_id1)
 
 
-    end
+  end
 
     
-  end
+  
 
   # PATCH/PUT /student_quizzes/1
   # PATCH/PUT /student_quizzes/1.json
