@@ -8,7 +8,7 @@ class McqsController < ApplicationController\
    				       choices1 => mcq1[:choices][1],
    				       choices2 => mcq1[:choices][2],
    				       choices3 => mcq1[:choices][3],
-   				       quiz_id: quiz_id,
+   				       quiz_id: q{:quiz1_id],
    				       question_statement: mcq1[:question_statement])
    			redirect_to :back
 	end
