@@ -26,7 +26,7 @@ class StudentMcqsController < ApplicationController
   # BOSSSS HENAAAAAAAAAAAAAAAAAAA!!!!!!!!!!!!!!!!!!!!!!!!!
   def create
     quiz_id1 = current_student_most_recent_quiz.id #m3rfsh most recent quiz di tetgab ezay 
-    mcq_id1 = Mcq.where(quiz_id: quiz_id1)
+    mcq_id1 = Mcq.where(quiz_id: quiz_id1).id
 
     params[:answers].each_index do |i|   
       McqAnswer.create(student_answer: params[:answers][i],
