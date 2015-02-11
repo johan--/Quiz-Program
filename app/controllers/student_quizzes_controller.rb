@@ -27,7 +27,7 @@ class StudentQuizzesController < ApplicationController
 
     # grading
 
-    quiz_id1 = current_student_last_quiz
+    quiz_id1 = current_student_last_quiz #m3rfsh last quiz di tetgab ezay brdo
     mcqs1 = Mcq.where(quiz_id: quiz_id1)
     
     grade = 0

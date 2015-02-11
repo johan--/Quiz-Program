@@ -65,8 +65,8 @@ class QuizzesController < ApplicationController
       quiz1 = Quiz.create(
           time_to_solve_the_quiz: params[:time_to_solve_the_quiz],
           time_to_be_published: params[:time_to_be_published],
-          instructor_id: current_instructor.id,
-          subject_id: params[:subject_id])
+          instructor_id: current_instructor[:instuctor_id],
+          subject_id: Subject.find(course_code: params[:course_code]).subject_id)
 
       redirect_to controller: "McqsController", action: "create"
     quiz1.set_quiz_full_mark
