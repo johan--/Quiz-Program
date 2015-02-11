@@ -8,9 +8,9 @@ class CreateMcqs < ActiveRecord::Migration
       t.string :choice3               , default: nil
       t.string :choice4               , default: nil
       t.integer :question_mark
-      t.boolean :bonus                , default: 0
+      t.boolean :bonus                , default: false
       t.text :explanation             , default: nil
-      t.boolean :hint                 , default: 0
+      t.boolean :hint                 , default: false
       t.text :hint_sentence           , default: nil
       t.integer :hint_discounted_mark , default: 0
 

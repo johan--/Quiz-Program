@@ -8,6 +8,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string :personal_image
       t.string :gender
       t.string :studying_year
+     # t.string :seat_number
 
       t.integer :section_id
 

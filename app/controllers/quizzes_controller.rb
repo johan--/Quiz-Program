@@ -1,8 +1,21 @@
 class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
-  before_action :autheticate_instructor!
+ #before_action :autheticate_instructor!
+  before_action :authenticate_student_or_instructor! , only: :prev_quizzes
+  before_action :authenticate_instructor! , only: :student_statistics
   # GET /quizzes
   # GET /quizzes.json
+  def prev_quizzes
+    subject = Subject.find_by_subject(params[:subject])
+    quizzes =  subject.quizzes.previous_quizzes
+    render json: @quizzes , :success => true, :status => :ok
+  end
+
+  def student_statistics
+    student = Student.find_by_seat_number(params[:seat_number])
+    render json: student.quizzes.previous_quizzes , :success => true, :status => :ok
+  end
+
   def index
     @quizzes = Quiz.all
   end

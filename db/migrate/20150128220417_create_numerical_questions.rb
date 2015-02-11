@@ -4,9 +4,9 @@ class CreateNumericalQuestions < ActiveRecord::Migration
 
     	t.string :question
       t.integer :question_mark
-      t.boolean :bonus                  , default: 0
+      t.boolean :bonus                  , default: false
       t.text :explanation              
-      t.boolean :hint                   , default: 0
+      t.boolean :hint                   , default: false
       t.text :hint_sentence             
       t.integer :hint_discounted_mark 
       t.integer :answer

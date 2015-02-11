@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   resources :students
 
+  get 'quizzes/prev_quizzes'
+
   root 'students#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

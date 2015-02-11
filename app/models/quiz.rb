@@ -31,6 +31,7 @@ class Quiz < ActiveRecord::Base
 
     
     scope :arrange, -> { order("time_to_be_published ASC") }
-    scope :coming_quizzes, -> { where("time_to_be_published > ?", Time.now) }
+    scope :coming_quizzes, -> { where("time_to_be_published > ?", Time.now + 5*60) }
+    scope :previous_quizzes, -> {where ("time_to_be_published < ?", Time.now) }
 
 end
