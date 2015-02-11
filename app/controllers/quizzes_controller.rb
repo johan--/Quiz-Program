@@ -68,7 +68,7 @@ class QuizzesController < ApplicationController
           instructor_id: current_instructor.id,
           subject_id: params[:subject_id])
 
-      redirect_to controller: "McqsController", action: "create", quiz_id: quiz1.id
+      redirect_to controller: "McqsController", action: "create", q{quiz1_id: quiz1.id}
     quiz1.set_quiz_full_mark
   end
 
