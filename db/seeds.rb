@@ -43,6 +43,12 @@ quiz4 = Quiz.create(quiz_mark: 20,duration:'00:30:00',
 	time_to_be_published:'2015-04-30 15:00:00')
 quiz5 = Quiz.create(quiz_mark: 15,duration:'00:20:00',
 	time_to_be_published:'2015-05-30 18:00:00')
+quiz6 = Quiz.create(quiz_mark: 15,duration:'00:20:00',
+	time_to_be_published:'2014-05-30 18:00:00')
+quiz7 = Quiz.create(quiz_mark: 15,duration:'00:20:00',
+	time_to_be_published:'2014-09-30 18:00:00')
+quiz8 = Quiz.create(quiz_mark: 15,duration:'00:20:00',
+	time_to_be_published:'2012-05-30 18:00:00')
 
 text1 = TextSentence.create(text_sentence: "text1")
 text2 = TextSentence.create(text_sentence: "text2")

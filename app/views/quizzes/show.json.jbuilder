@@ -1,1 +1,3 @@
-json.extract! @quiz, :id, :created_at, :updated_at
+
+
+json.error("You have to wait for the quiz to be available")

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
         authenticate_student!
       elsif instructor_signed_in?
         authenticate_instructor!
-
+      end
     end
   
   	def authenticate_any!
@@ -22,4 +22,5 @@ class ApplicationController < ActionController::Base
   			authenticate_instructor!
   		end
   	end
+
 end

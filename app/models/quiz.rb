@@ -13,12 +13,12 @@ class Quiz < ActiveRecord::Base
 	has_many :mcqs
 	has_many :text_sentences
 
-
     # validates :average_degree, :numericality => true,
     # 					   :inclusion => {:within => 0..quiz_mark}
 
     validates :quiz_mark, :presence => true,
     					  :numericality => true
+
 
     def set_quiz_full_mark()
     	temp_quiz_mark = 0
@@ -29,9 +29,10 @@ class Quiz < ActiveRecord::Base
     end
 
 
+
     
-    scope :arrange, -> { order("time_to_be_published ASC") }
-    scope :coming_quizzes, -> { where("time_to_be_published > ?", Time.now + 5*60) }
-    scope :previous_quizzes, -> {where ("time_to_be_published < ?", Time.now) }
+    scope :arrange,             -> { order("time_to_be_published ASC") }
+    scope :coming_quizzes,      -> { where("time_to_be_published > ?", Time.now - 5*60) }
+    scope :previous_quizzes,    -> { where("time_to_be_published < ?", Time.now + 10*60) }
 
 end

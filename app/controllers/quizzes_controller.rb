@@ -1,19 +1,22 @@
 class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
- #before_action :autheticate_instructor!
+  before_action :authenticate_student!, only: [:index]
   before_action :authenticate_student_or_instructor! , only: :prev_quizzes
   before_action :authenticate_instructor! , only: :student_statistics
   # GET /quizzes
   # GET /quizzes.json
   def prev_quizzes
-    subject = Subject.find_by_subject(params[:subject])
-    quizzes =  subject.quizzes.previous_quizzes
-    render json: @quizzes , :success => true, :status => :ok
+     subject = Subject.find_by_course_code(params[:course_code])
+     quizzes =  subject.quizzes.previous_quizzes
+     render :template=>"quizzes/prev_quizzes.json.jbuilder",locals:{quizzes: quizzes}, 
+      :success => true, :status=> :ok, :formats => [:json]
   end
 
   def student_statistics
     student = Student.find_by_seat_number(params[:seat_number])
-    render json: student.quizzes.previous_quizzes , :success => true, :status => :ok
+    render :template=>"quizzes/student_statistics.json.jbuilder",
+    locals:{quizzes: student.quizzes.previous_quizzes , student: student}, 
+      :success => true, :status=> :ok, :formats => [:json]
   end
 
   def index
@@ -23,6 +26,17 @@ class QuizzesController < ApplicationController
   # GET /quizzes/1
   # GET /quizzes/1.json
   def show
+    if student_signed_in? and current_student.quizzes.include?(@quiz)
+      #and @quiz.time_to_be_published > Time.now
+      render :template=>"quizzes/quiz.json.jbuilder", :success => true, :status=> :ok,
+      :formats => [:json]
+    elsif instructor_signed_in? and current_instructor.quizzes.include?(@quiz)
+      render :template=>"quizzes/quiz.json.jbuilder", :success => true, :status=> :ok,
+      :formats => [:json]
+    else
+      render :template=>"quizzes/show.json.jbuilder", :success => false, :status=> :ok,
+      :formats => [:json]
+    end
   end
 
   # GET /quizzes/new
@@ -46,12 +60,21 @@ class QuizzesController < ApplicationController
   #     else
   #       format.html { render :new }
   #       format.json { render json: @quiz.errors, status: :unprocessable_entity }
-  #     end
+  #     end20150128160251
   #   end
   # end
+   def create
+      quiz1 = Quiz.create(
+          time_to_solve_the_quiz: params[:time_to_solve_the_quiz],
+          time_to_be_published: params[:time_to_be_published],
+          instructor_id: current_instructor.id,
+          subject_id: params[:subject_id])
 
+      redirect_to controller: "McqsController", action: "create"
+    quiz1.set_quiz_full_mark
+  end
   # PATCH/PUT /quizzes/1
-  # PATCH/PUT /quizzes/1.json
+  # PATCH/PUT /quizzes/1.json 
   def update
     respond_to do |format|
       if @quiz.update(quiz_params)
@@ -74,17 +97,6 @@ class QuizzesController < ApplicationController
     end
   end
 
-  def create
-      quiz1 = Quiz.create(
-          time_to_solve_the_quiz: params[:time_to_solve_the_quiz],
-          time_to_be_published: params[:time_to_be_published],
-          instructor_id: current_instructor.id,
-          subject_id: params[:subject_id])
-
-      redirect_to controller: "McqsController", action: "create"
-    quiz1.set_quiz_full_mark
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz
@@ -95,7 +107,5 @@ class QuizzesController < ApplicationController
     def quiz_params
       params[:quiz]
     end
-
-
 
 end

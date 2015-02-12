@@ -2,7 +2,8 @@ class CreateTrueOrFalseQuestions < ActiveRecord::Migration
   def change
     create_table :true_or_false_questions do |t|
 
-	    t.integer :question_mark
+	    t.string :question
+      t.integer :question_mark
       t.boolean :bonus
       t.text :explanation
       t.boolean :hint

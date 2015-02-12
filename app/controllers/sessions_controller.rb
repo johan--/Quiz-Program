@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
     if user and user.valid_password?(params[:password])
       user.ensure_authentication_token!  # make sure the user has a token generated  
       sign_in user if user   
-      render :template=>"sessions/create.json.jbuilder", :status=> :created, locals: {user: user,
-        coming_quiz: user.quizzes.arrange.coming_quizzes.first} , :formats => [:json]
+      render :template=>"sessions/create.json.jbuilder", :status=> :created, locals: {user: user ,
+       coming_quiz: user.quizzes.arrange.coming_quizzes.first} , :formats => [:json]
 
     end
   end
@@ -23,10 +23,12 @@ class SessionsController < ApplicationController
     elsif admin_signed_in?
       user = Admin.where(:authentication_token => params[:auth_token]).first
     else
-      render :json => {:message => ["You aren't signed in"]}, :success => false, :status => :ok
+      render :template=>"sessions/delete.json.jbuilder", :success => false, :status=> :ok,
+        locals: {message: "Sign out failed"} ,:formats => [:json]
     end
     user.reset_authentication_token!
-      render :json => { :message => ["Session deleted."] },  :success => true, :status => :ok
+      render :template=>"sessions/delete.json.jbuilder", :status=> :ok,
+        locals: {message: "Good Bye"} ,:formats => [:json]
   end
 
   private
@@ -49,7 +51,7 @@ class SessionsController < ApplicationController
 
     def invalid_login_attempt
      warden.custom_failure!
-     render :json => { :errors => ["Invalid email or password."] },  :success => false, :status => :unauthorized
+     render :template=>"sessions/invalid_login_attempt.json.jbuilder", :success => false,
+      :status => :unauthorized ,:formats => [:json]
     end
-
 end

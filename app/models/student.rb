@@ -33,23 +33,23 @@ class Student < ActiveRecord::Base
 	# 			:presence => true, 
 	# 			:length => {:within => 6..60}
 
-    validates :date_of_birth, 
-    			:presence => true,
-    			:numericality => {:only_integer => true},
-    			:length => {:is => 4}
+    # validates :date_of_birth, 
+    # 			:presence => true,
+    # 			:numericality => {:only_integer => true},
+    # 			:length => {:is => 4}
 
-	validates :studying_year, 
-				:presence => true,
-				:inclusion => {:in => ["primary", "first", "second", "third", "fourth" ]}
+	# validates :studying_year, 
+	# 			:presence => true,
+	# 			:inclusion => {:in => ["primary", "first", "second", "third", "fourth" ]}
 
-	validates :expected_year_of_graduation, 
-				:presence => true,
-				:length => {:is => 4},
-				:numericality => {:only_integer => true}
+	# validates :expected_year_of_graduation, 
+	# 			:presence => true,
+	# 			:length => {:is => 4},
+	# 			:numericality => {:only_integer => true}
 
-	validates :gender, 
-				:presence => true,
-			    :inclusion => {:in => ["male", "female"]}
+	# validates :gender, 
+	# 			:presence => true,
+	# 		    :inclusion => {:in => ["male", "female"]}
 
 	# validates :email, 
 	# 			:presence => true,

@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 20150210164710) do
     t.string   "personal_image",              limit: 255
     t.string   "gender",                      limit: 255
     t.string   "studying_year",               limit: 255
+    t.string   "seat_number",                 limit: 255
     t.integer  "section_id",                  limit: 4
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
@@ -201,6 +202,7 @@ ActiveRecord::Schema.define(version: 20150210164710) do
   end
 
   create_table "true_or_false_questions", force: :cascade do |t|
+    t.string   "question",             limit: 255
     t.integer  "question_mark",        limit: 4
     t.boolean  "bonus",                limit: 1
     t.text     "explanation",          limit: 65535
