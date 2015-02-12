@@ -66,7 +66,7 @@ class QuizzesController < ApplicationController
           time_to_solve_the_quiz: params[:time_to_solve_the_quiz],
           time_to_be_published: params[:time_to_be_published],
           instructor_id: current_instructor.id,
-          subject_id: Subject.find(course_code: params[:course_code]).subject_id)
+          subject_id: Subject.find(course_code: params[:course_code]).id)
 
       redirect_to controller: "McqsController", action: "create", quiz1
     
