@@ -12,12 +12,14 @@ class Quiz < ActiveRecord::Base
 	has_many :true_or_false_questions
 	has_many :mcqs
 	has_many :text_sentences
+    					   
+    validates :quiz_mark, 
+                    :presence => true,
+    				:numericality => true
 
-    # validates :average_degree, :numericality => true,
-    # 					   :inclusion => {:within => 0..quiz_mark}
-
-    validates :quiz_mark, :presence => true,
-    					  :numericality => true
+    validates :duration,
+                 :presence => true,
+                 :numericality => true
 
 
     def set_quiz_full_mark()

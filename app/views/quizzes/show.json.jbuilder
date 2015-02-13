@@ -1,3 +1,3 @@
 
 
-json.error("You have to wait for the quiz to be available")
+json.error("You can't access this quiz right now")

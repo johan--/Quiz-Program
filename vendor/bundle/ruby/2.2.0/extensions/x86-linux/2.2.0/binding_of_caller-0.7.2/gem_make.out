@@ -1,0 +1,12 @@
+/home/mido/.rvm/rubies/ruby-2.2.0/bin/ruby -r ./siteconf20150211-27609-m4j4ve.rb extconf.rb 
+
+make "DESTDIR=" clean
+make: *** No rule to make target `clean'. Stop.
+
+make "DESTDIR="
+echo "Nada."
+Nada.
+
+make "DESTDIR=" install
+echo "Nada."
+Nada.

@@ -13,19 +13,17 @@ class Instructor < ActiveRecord::Base
         ######################## validations #######################
   # validate :instructor_name_is_present_and_allowed
 
-	# validates :email, 
- #            :presence => true,
-	# 				  :email_format => {:message => "is not looking good"},
-	# 				  :uniqueness => true
 
 	validates :gender,
             :presence => true,
 					  :inclusion => {:in => ["male", "female"]}
     
-  validates :password,
-            :presence => true,
-    				:length => {:within => 6..60}
-
+ 
+  validates :name,
+        :presence => true,
+        format:{with: /\A[a-zA-Z]+\z/,
+          message:"only allows letters"}
+          
     # def instructor_name_is_present_and_allowed
 
     # 	if self.name.present?

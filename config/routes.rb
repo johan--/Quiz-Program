@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
 
 
+  resources :student_mcqs
+
   devise_for :admins , :controllers => {sessions:'sessions'}
   devise_for :instructors , :controllers => {sessions:'sessions'}
   devise_for :students , :controllers => {sessions:'sessions'}
@@ -11,17 +13,18 @@ Rails.application.routes.draw do
     post "/sign_in" => "sessions#create"
     delete "/sign_out" => "sessions#destroy"
   end
- 
+  
+  post 'sessions/authorize'
 
-  match ':controller(/:action)' , :via => :get 
+  get 'quizzes/prev_quizzes'
 
+  get 'quizzes/student_statistics'
+  
   resources :instructors
 
   resources :quizzes
 
   resources :students
-
-  get 'quizzes/prev_quizzes'
 
   root 'students#index'
 

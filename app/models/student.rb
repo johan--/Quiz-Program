@@ -25,18 +25,8 @@ class Student < ActiveRecord::Base
 
 	belongs_to :section
 
-	
-	# The validation style used is the sexy validation
-    # validate :student_name_is_present_and_allowed				 
+	######################## Validations ########################
 
-	# validates :password, 
-	# 			:presence => true, 
-	# 			:length => {:within => 6..60}
-
-    # validates :date_of_birth, 
-    # 			:presence => true,
-    # 			:numericality => {:only_integer => true},
-    # 			:length => {:is => 4}
 
 	# validates :studying_year, 
 	# 			:presence => true,
@@ -51,14 +41,15 @@ class Student < ActiveRecord::Base
 	# 			:presence => true,
 	# 		    :inclusion => {:in => ["male", "female"]}
 
-	# validates :email, 
-	# 			:presence => true,
-	# 	 		:uniqueness => true,
-	# 			:email_format => {:message => "is not looking good"}
-					  
-	# validates :section_number, 
+	# validates :seat_number,
 	# 			:presence => true,
 	# 			:numericality => {:only_integer => true}
+
+	# validates :name,
+	# 			:presence => true,
+	# 			format:{with: /\A[a-zA-Z]+\z/,
+ #    			message:"only allows letters"}
+
 
     # def student_name_is_present_and_allowed
 

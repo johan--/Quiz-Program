@@ -7,7 +7,12 @@ class Subject < ActiveRecord::Base
     belongs_to :instructors
 
 
-    # validate :subject_is_present_and_allowed   					    												
+    # validate :subject_is_present_and_allowed   	
+    validates :course_code,
+                presence: true
+
+    validates :subject,
+                presence: true				    												
    
     validates :studying_year,
                 :presence => true,

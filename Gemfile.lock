@@ -64,6 +64,7 @@ GEM
       warden (~> 1.2.3)
     devise-token_authenticatable (0.3.0)
       devise (~> 3.4.0)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.3.0)
     globalid (0.3.2)
@@ -125,6 +126,23 @@ GEM
     ref (1.0.5)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    rspec-core (3.2.0)
+      rspec-support (~> 3.2.0)
+    rspec-expectations (3.2.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-mocks (3.2.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-rails (3.2.0)
+      actionpack (>= 3.0, <= 4.2)
+      activesupport (>= 3.0, <= 4.2)
+      railties (>= 3.0, <= 4.2)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
+      rspec-support (~> 3.2.0)
+    rspec-support (3.2.1)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -171,10 +189,12 @@ DEPENDENCIES
   devise
   devise-token_authenticatable
   jbuilder (~> 2.0)
+  json
   mysql2
   pg
   rails (= 4.2.0)
   rails_12factor
+  rspec-rails
   sdoc (~> 0.4.0)
   shoulda
   spring

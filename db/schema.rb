@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 20150210164710) do
   end
 
   create_table "quizzes", force: :cascade do |t|
-    t.time     "duration"
+    t.integer  "duration",             limit: 4
     t.string   "quiz_title",           limit: 255
     t.datetime "time_to_be_published"
     t.integer  "average_degree",       limit: 4

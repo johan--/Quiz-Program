@@ -9,19 +9,30 @@ class Mcq < ActiveRecord::Base
     
     ######################## validations ########################
 
-	# explanation_regex = /\A[a-zA-Z]+\s\Z/
  
     validates :question_mark,
               :presence => true,
               :numericality => {:only_integer => true}
 
-    validates :bonus,
-              :numericality => true
-
-    validates :hint, 
+    validates :hint_discounted_mark, 
               :numericality => {:only_integer => true}
 
     validates :answer,
               :presence => true
+
+    validates :question,
+            presence: true
+
+    validates :choice1,
+            presence: true
+
+    validates :choice2,
+            presence: true
+
+    validates :choice3,
+            presence: true
+
+    validates :choice4,
+            presence: true
 
 end

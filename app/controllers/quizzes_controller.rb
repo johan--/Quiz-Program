@@ -1,19 +1,28 @@
 class QuizzesController < ApplicationController
+  require 'json'
+  require "rubygems"
+
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_student!, only: [:index]
-  before_action :authenticate_student_or_instructor! , only: :prev_quizzes
-  before_action :authenticate_instructor! , only: :student_statistics
+  before_action :authenticate_student_or_instructor! , only: [:prev_quizzes,:show]
+ # before_action :authenticate_instructor! , only: :student_statistics
   # GET /quizzes
   # GET /quizzes.json
   def prev_quizzes
      subject = Subject.find_by_course_code(params[:course_code])
+     if subject.nil?
+      render :template=>"sessions/delete.json.jbuilder",locals:{message: "No previous quizzes"} ,
+      :success => true, :status=> :ok, :formats => [:json]
+     else
      quizzes =  subject.quizzes.previous_quizzes
      render :template=>"quizzes/prev_quizzes.json.jbuilder",locals:{quizzes: quizzes}, 
       :success => true, :status=> :ok, :formats => [:json]
+    end
   end
 
   def student_statistics
-    student = Student.find_by_seat_number(params[:seat_number])
+   #student = Student.find_by_seat_number(params[:seat_number])
+   student = Student.find(2)
     render :template=>"quizzes/student_statistics.json.jbuilder",
     locals:{quizzes: student.quizzes.previous_quizzes , student: student}, 
       :success => true, :status=> :ok, :formats => [:json]
@@ -26,15 +35,13 @@ class QuizzesController < ApplicationController
   # GET /quizzes/1
   # GET /quizzes/1.json
   def show
-    if student_signed_in? and current_student.quizzes.include?(@quiz)
-      #and @quiz.time_to_be_published > Time.now
-      render :template=>"quizzes/quiz.json.jbuilder", :success => true, :status=> :ok,
-      :formats => [:json]
-    elsif instructor_signed_in? and current_instructor.quizzes.include?(@quiz)
+    if  (student_signed_in? and current_student.quizzes.include?(@quiz) )#and 
+     # @quiz.time_to_be_published <= Time.now) or (instructor_signed_in? and 
+     # current_instructor.quizzes.include?(@quiz))
       render :template=>"quizzes/quiz.json.jbuilder", :success => true, :status=> :ok,
       :formats => [:json]
     else
-      render :template=>"quizzes/show.json.jbuilder", :success => false, :status=> :ok,
+      render :template=>"quizzes/show.json.jbuilder", :success => false, :status=> :unauthorized,
       :formats => [:json]
     end
   end
@@ -50,29 +57,41 @@ class QuizzesController < ApplicationController
 
   # POST /quizzes
   # POST /quizzes.json
-  # def create
-  #   @quiz = Quiz.new(quiz_params)
 
-  #   respond_to do |format|
-  #     if @quiz.save
-  #       format.html { redirect_to @quiz, notice: 'Quiz was successfully created.' }
-  #       format.json { render :show, status: :created, location: @quiz }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @quiz.errors, status: :unprocessable_entity }
-  #     end20150128160251
-  #   end
-  # end
-   def create
-      quiz1 = Quiz.create(
-          time_to_solve_the_quiz: params[:time_to_solve_the_quiz],
-          time_to_be_published: params[:time_to_be_published],
-          instructor_id: current_instructor.id,
-          subject_id: params[:subject_id])
+  def create
+      @subject1 = Subject.find_by_course_code(params["course_code"])
+            
+      @quiz1 = Quiz.create(quiz_params)
+      @quiz1.instructor_id = current_instructor.id
+      @quiz1.subject_id = @subject1.id
 
-      redirect_to controller: "McqsController", action: "create"
-    quiz1.set_quiz_full_mark
-  end
+             
+      params["mcqs"].each do |mcq1|
+                
+                  @mcq9 = Mcq.new
+
+                  @mcq9.answer = mcq1["answer"]
+                  @mcq9.choice1 =  mcq1["choice1"]
+                  @mcq9.choice2 = mcq1["choice2"]
+                  @mcq9.choice3 = mcq1["choice3"]
+                  @mcq9.choice4 = mcq1["choice4"]
+                  @mcq9.question_mark = mcq1["question_mark"]
+                  @mcq9.question = mcq1["question"]
+                  @mcq9.quiz_id = @quiz1.id
+                 
+                  @mcq9.save!
+
+         end  
+    @quiz1.set_quiz_full_mark
+    @quiz1.assign_to_students
+
+
+      respond_to do |format|
+        format.json {render json:@subject1 , status: :ok , success: true }
+      end
+    end
+
+
   # PATCH/PUT /quizzes/1
   # PATCH/PUT /quizzes/1.json 
   def update
@@ -98,6 +117,10 @@ class QuizzesController < ApplicationController
   end
 
   private
+
+  def quiz_params
+        params.require(:quiz).permit(:quiz_title, :duration,:time_to_be_published)
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_quiz
       @quiz = Quiz.find(params[:id])
@@ -106,6 +129,12 @@ class QuizzesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def quiz_params
       params[:quiz]
+    end
+
+    def mcq_params
+    params.respond_to?(:permit) ?
+        params.require(:mcq).permit(:mcqs => [ :name ]) :
+        params[:picture].slice(:identifier => [ :name ]) rescue nil
     end
 
 end

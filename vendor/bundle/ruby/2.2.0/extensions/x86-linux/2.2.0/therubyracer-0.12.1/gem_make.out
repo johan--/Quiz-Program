@@ -1,0 +1,39 @@
+/home/mido/.rvm/rubies/ruby-2.2.0/bin/ruby -r ./siteconf20150211-4052-hga8nv.rb extconf.rb 
+checking for main() in -lpthread... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling value.cc
+compiling message.cc
+compiling gc.cc
+compiling object.cc
+compiling v8.cc
+compiling function.cc
+compiling signature.cc
+compiling heap.cc
+compiling invocation.cc
+compiling init.cc
+compiling external.cc
+compiling trycatch.cc
+compiling template.cc
+compiling constraints.cc
+compiling accessor.cc
+compiling date.cc
+compiling primitive.cc
+compiling constants.cc
+compiling string.cc
+compiling locker.cc
+compiling stack.cc
+compiling rr.cc
+compiling script.cc
+compiling exception.cc
+compiling handles.cc
+compiling backref.cc
+compiling array.cc
+compiling context.cc
+linking shared-object v8/init.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 init.so ./.gem.20150211-4052-dj1149/v8

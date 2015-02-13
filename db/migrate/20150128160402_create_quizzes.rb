@@ -2,7 +2,7 @@ class CreateQuizzes < ActiveRecord::Migration
   def change
     create_table :quizzes do |t|
 
-      t.time :duration
+      t.integer :duration
       t.string :quiz_title
       t.datetime :time_to_be_published
       t.integer :average_degree
