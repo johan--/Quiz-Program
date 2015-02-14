@@ -9,7 +9,6 @@ json.coming_quiz_title("No")
 json.coming_quiz_subject("No")
 json.coming_quiz_time("No")
 json.coming_quiz_id("No")
-json.coming_quiz_duration("No")
 
 elsif @role == "student"
 json.coming_quiz_title(coming_quiz.quiz_title)

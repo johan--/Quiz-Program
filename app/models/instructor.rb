@@ -19,10 +19,10 @@ class Instructor < ActiveRecord::Base
 					  :inclusion => {:in => ["male", "female"]}
     
  
-  validates :name,
-        :presence => true,
-        format:{with: /\A[a-zA-Z]+\z/,
-          message:"only allows letters"}
+  # validates :name,
+  #       :presence => true,
+  #       format:{with: /\A[a-zA-Z]+\z/,
+  #         message:"only allows letters"}
           
     # def instructor_name_is_present_and_allowed
 

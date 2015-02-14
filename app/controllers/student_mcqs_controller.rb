@@ -26,18 +26,24 @@ class StudentMcqsController < ApplicationController
   
   def create
     @quiz_id1 =  params["quiz_id"]
-    @mcqs1 = Mcq.where(quiz_id: @quiz_id1)
-    @grade=0
-    params["answers"].each_index do |i|   
-      @stu_mcq = StudentMcq.new
-      @stu_mcq.student_answer = params["answers"][i]
-      @stu_mcq.mcq_id = @mcqs1[i].id
-      @stu_mcq.student_id = current_student.id
 
-      if @stu_mcq[:student_answer] == @mcqs1[i][:answer].to_i
+    if StudentQuiz.find_by(student_id: current_student.id, quiz_id: @quiz_id1)
+      render :template=>"student_mcqs/new.json.jbuilder", :status=> :unauthorized, 
+      :formats => [:json]
+    end
+
+    @mcqs1 = Mcq.where(quiz_id: @quiz_id1)
+    @grade = 0
+    params["answers"].each_index do |i|   
+        @stu_mcq = StudentMcq.new
+        @stu_mcq.student_answer = params["answers"][i]
+        @stu_mcq.mcq_id = @mcqs1[i].id
+        @stu_mcq.student_id = current_student.id
+
+        if @stu_mcq[:student_answer] == @mcqs1[i][:answer].to_i
         
-        @grade = @grade + @mcqs1[i][:question_mark]
-      end
+         @grade = @grade + @mcqs1[i][:question_mark]
+        end
     end
 
     StudentQuiz.create(student_quiz_mark: @grade, student_id: current_student.id, quiz_id: @quiz_id1)

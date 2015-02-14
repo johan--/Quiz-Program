@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     if user and user.valid_password?(params[:password])
       user.ensure_authentication_token!  # make sure the user has a token generated  
       sign_in user if user   
-      render :template=>"sessions/create.json.jbuilder", :status=> :created, locals: {user: user ,
+      render :template=>"sessions/create.json.jbuilder", :status=> :ok, locals: {user: user ,
        coming_quiz: user.quizzes.arrange.coming_quizzes.first} , :formats => [:json]
     else
       invalid_login_attempt
