@@ -77,21 +77,27 @@ class QuizzesController < ApplicationController
 
   # POST /quizzes
   # POST /quizzes.json
-
-  def create
+ def create
+     
       @subject1 = Subject.find_by_course_code(params["course_code"])
-            
-      @quiz1 = Quiz.create(quiz_params)
+      
+
+      @quiz1 = Quiz.new
+
       @quiz1.instructor_id = current_instructor.id
       @quiz1.subject_id = @subject1.id
+      @quiz1.quiz_title = params["quiz_title"]
+      @quiz1.duration = params["duration"]
+      @quiz1.time_to_be_published = params["time_to_be_published"]
 
-             
+      @quiz1.save!
+       
       params["mcqs"].each do |mcq1|
                 
                   @mcq9 = Mcq.new
 
                   @mcq9.answer = mcq1["answer"]
-                  @mcq9.choice1 =  mcq1["choice1"]
+                  @mcq9.choice1 = mcq1["choice1"]
                   @mcq9.choice2 = mcq1["choice2"]
                   @mcq9.choice3 = mcq1["choice3"]
                   @mcq9.choice4 = mcq1["choice4"]
@@ -100,17 +106,18 @@ class QuizzesController < ApplicationController
                   @mcq9.quiz_id = @quiz1.id
                  
                   @mcq9.save!
-
          end  
-    @quiz1.set_quiz_full_mark
-    @quiz1.assign_to_students
+
+      @quiz1.set_quiz_full_mark
+      @quiz1.assign_to_students
+
+      @quiz1.save!
 
 
       respond_to do |format|
         format.json {render json:@subject1 , status: :ok , success: true }
       end
-    end
-
+  end
 
   # PATCH/PUT /quizzes/1
   # PATCH/PUT /quizzes/1.json 
@@ -146,15 +153,15 @@ class QuizzesController < ApplicationController
       @quiz = Quiz.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def quiz_params
-      params[:quiz]
-    end
+    # # Never trust parameters from the scary internet, only allow the white list through.
+    # def quiz_params
+    #   params[:quiz]
+    # end
 
-    def mcq_params
-    params.respond_to?(:permit) ?
-        params.require(:mcq).permit(:mcqs => [ :name ]) :
-        params[:picture].slice(:identifier => [ :name ]) rescue nil
-    end
+    # def mcq_params
+    # params.respond_to?(:permit) ?
+    #     params.require(:mcq).permit(:mcqs => [ :name ]) :
+    #     params[:picture].slice(:identifier => [ :name ]) rescue nil
+    # end
 
 end

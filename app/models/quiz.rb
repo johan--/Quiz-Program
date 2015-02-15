@@ -30,7 +30,15 @@ class Quiz < ActiveRecord::Base
         self.quiz_mark = temp_quiz_mark
     end
 
-    
+       def assign_to_students
+        @subject = Subject.find_by_id(self.subject_id)
+        @students = @subject.students
+        @students.each do |a_student|
+            a_student.quizzes << self
+            a_student.save!
+        end
+    end
+
 
     
     scope :arrange,             -> { order("time_to_be_published ASC") }
