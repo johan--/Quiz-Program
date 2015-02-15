@@ -30,7 +30,7 @@ class Quiz < ActiveRecord::Base
         self.quiz_mark = temp_quiz_mark
     end
 
-
+    
 
     
     scope :arrange,             -> { order("time_to_be_published ASC") }

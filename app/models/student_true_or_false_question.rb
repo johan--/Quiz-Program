@@ -6,7 +6,7 @@ class StudentTrueOrFalseQuestion < ActiveRecord::Base
 	belongs_to :true_or_false_question
 
 
-    validates :answer, 
+    validates :student_answer, 
     			:presence => true
 
 end

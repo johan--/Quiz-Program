@@ -13,9 +13,10 @@ class TrueOrFalseQuestion < ActiveRecord::Base
 		presence: true 
 
 		validates :question_mark,
+		presence: true , 
 			:numericality => {:only_integer => true}
 
-			validates :answer
+			validates :answer,
 			presence: true
 
 	

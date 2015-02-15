@@ -1,0 +1,188 @@
+  [1m[36m (1.2ms)[0m  [1mDROP DATABASE IF EXISTS `takeAQuiz_test`[0m
+  [1m[35m (11.7ms)[0m  CREATE DATABASE `takeAQuiz_test` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`
+  [1m[36m (76.1ms)[0m  [1mCREATE TABLE `admins` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `gender` varchar(255), `admin_authority` tinyint(1), `reply_msg_authority` tinyint(1), `add_authority` tinyint(1), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int(11) DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `authentication_token` varchar(255)) ENGINE=InnoDB[0m
+  [1m[35m (155.8ms)[0m  CREATE UNIQUE INDEX `index_admins_on_authentication_token` USING btree ON `admins` (`authentication_token`) 
+  [1m[36m (155.7ms)[0m  [1mCREATE UNIQUE INDEX `index_admins_on_email` USING btree ON `admins` (`email`) [0m
+  [1m[35m (146.4ms)[0m  CREATE UNIQUE INDEX `index_admins_on_reset_password_token` USING btree ON `admins` (`reset_password_token`) 
+  [1m[36m (85.7ms)[0m  [1mCREATE TABLE `instructors` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `gender` varchar(255), `role` varchar(255) DEFAULT 'instructor', `personal_image` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int(11) DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `authentication_token` varchar(255)) ENGINE=InnoDB[0m
+  [1m[35m (144.6ms)[0m  CREATE UNIQUE INDEX `index_instructors_on_authentication_token` USING btree ON `instructors` (`authentication_token`) 
+  [1m[36m (152.8ms)[0m  [1mCREATE UNIQUE INDEX `index_instructors_on_email` USING btree ON `instructors` (`email`) [0m
+  [1m[35m (154.7ms)[0m  CREATE UNIQUE INDEX `index_instructors_on_reset_password_token` USING btree ON `instructors` (`reset_password_token`) 
+  [1m[36m (66.2ms)[0m  [1mCREATE TABLE `instructors_students` (`instructor_id` int(11), `student_id` int(11)) ENGINE=InnoDB[0m
+  [1m[35m (75.3ms)[0m  CREATE TABLE `mcqs` (`id` int(11) auto_increment PRIMARY KEY, `question` varchar(255), `choice1` varchar(255), `choice2` varchar(255), `choice3` varchar(255), `choice4` varchar(255), `question_mark` int(11), `bonus` tinyint(1) DEFAULT 0, `explanation` text, `hint` tinyint(1) DEFAULT 0, `hint_sentence` text, `hint_discounted_mark` int(11) DEFAULT 0, `answer` varchar(255), `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (90.2ms)[0m  [1mCREATE TABLE `numerical_questions` (`id` int(11) auto_increment PRIMARY KEY, `question` varchar(255), `question_mark` int(11), `bonus` tinyint(1) DEFAULT 0, `explanation` text, `hint` tinyint(1) DEFAULT 0, `hint_sentence` text, `hint_discounted_mark` int(11), `answer` int(11), `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (77.3ms)[0m  CREATE TABLE `quizzes` (`id` int(11) auto_increment PRIMARY KEY, `duration` int(11), `quiz_title` varchar(255), `time_to_be_published` datetime, `average_degree` int(11), `quiz_mark` int(11), `instructor_id` int(11), `subject_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (75.6ms)[0m  [1mCREATE TABLE `sections` (`id` int(11) auto_increment PRIMARY KEY, `section_number` int(11), `department` varchar(255), `studying_year` varchar(255), `sub_department` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (87.7ms)[0m  CREATE TABLE `student_mcqs` (`id` int(11) auto_increment PRIMARY KEY, `student_answer` int(11), `student_id` int(11), `mcq_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (65.5ms)[0m  [1mCREATE TABLE `student_numerical_questions` (`id` int(11) auto_increment PRIMARY KEY, `student_answer` int(11), `student_id` int(11), `numerical_question_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (99.5ms)[0m  CREATE TABLE `student_quizzes` (`id` int(11) auto_increment PRIMARY KEY, `student_quiz_mark` int(11), `student_id` int(11), `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (76.0ms)[0m  [1mCREATE TABLE `student_true_or_false_questions` (`id` int(11) auto_increment PRIMARY KEY, `student_answer` tinyint(1), `true_or_false_question_id` int(11), `student_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (76.1ms)[0m  CREATE TABLE `students` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `date_of_birth` date, `expected_year_of_graduation` int(11), `personal_image` varchar(255), `gender` varchar(255), `studying_year` varchar(255), `seat_number` varchar(255), `section_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int(11) DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `authentication_token` varchar(255)) ENGINE=InnoDB
+  [1m[36m (144.0ms)[0m  [1mCREATE UNIQUE INDEX `index_students_on_authentication_token` USING btree ON `students` (`authentication_token`) [0m
+  [1m[35m (180.2ms)[0m  CREATE UNIQUE INDEX `index_students_on_email` USING btree ON `students` (`email`) 
+  [1m[36m (157.1ms)[0m  [1mCREATE UNIQUE INDEX `index_students_on_reset_password_token` USING btree ON `students` (`reset_password_token`) [0m
+  [1m[35m (66.2ms)[0m  CREATE TABLE `students_subjects` (`student_id` int(11), `subject_id` int(11)) ENGINE=InnoDB
+  [1m[36m (64.9ms)[0m  [1mCREATE TABLE `subjects` (`id` int(11) auto_increment PRIMARY KEY, `subject` varchar(255), `course_code` varchar(255), `studying_year` varchar(255), `instructor_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (65.5ms)[0m  CREATE TABLE `text_sentences` (`id` int(11) auto_increment PRIMARY KEY, `text_sentence` text, `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (75.1ms)[0m  [1mCREATE TABLE `true_or_false_questions` (`id` int(11) auto_increment PRIMARY KEY, `question` varchar(255), `question_mark` int(11), `bonus` tinyint(1), `explanation` text, `hint` tinyint(1), `hint_sentence` text, `hint_discounted_mark` int(11), `answer` tinyint(1), `quiz_id` int(11), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (83.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (213.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) [0m
+  [1m[35m (0.6ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (31.5ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20150210164710')[0m
+  [1m[35m (33.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20150129035921')
+  [1m[36m (33.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20150128220352')[0m
+  [1m[35m (33.4ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20150209042619')
+  [1m[36m (33.3ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20150128160327')[0m
+  [1m[35m (33.6ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20150129035907')
+  [1m[36m (33.4ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20150129035841')[0m
+  [1m[35m (33.4ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20150128220417')
+  [1m[36m (33.2ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20150128220436')[0m
+  [1m[35m (33.6ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20150128160251')
+  [1m[36m (33.4ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20150129034220')[0m
+  [1m[35m (33.0ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20150209042610')
+  [1m[36m (33.4ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20150128220300')[0m
+  [1m[35m (44.4ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20150129041425')
+  [1m[36m (33.4ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20150129145438')[0m
+  [1m[35m (33.6ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20150205224045')
+  [1m[36m (33.4ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20150128160402')[0m
+  [1m[35m (33.4ms)[0m  INSERT INTO `schema_migrations` (version) VALUES ('20150128160300')
+  [1m[36m (44.6ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('20150128160308')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by StudentMcqsController#new as HTML
+  Rendered student_mcqs/new.html.erb (0.4ms)
+Completed 200 OK in 23ms (Views: 12.7ms | ActiveRecord: 2.7ms)
+  [1m[36m (0.6ms)[0m  [1mSELECT COUNT(*) FROM `student_mcqs`[0m
+Started GET "/student_mcqs" for 127.0.0.1 at 2015-02-15 01:48:38 +0200
+Processing by StudentMcqsController#index as HTML
+  [1m[35mStudentMcq Load (0.5ms)[0m  SELECT `student_mcqs`.* FROM `student_mcqs`
+  Rendered student_mcqs/index.html.erb (5.0ms)
+Completed 200 OK in 20ms (Views: 5.9ms | ActiveRecord: 0.5ms)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `student_mcqs` (`created_at`, `updated_at`) VALUES ('2015-02-14 23:48:38.273604', '2015-02-14 23:48:38.273604')
+  [1m[36m (40.2ms)[0m  [1mCOMMIT[0m
+  Rendered student_mcqs/_form.html.erb (2.4ms)
+  Rendered student_mcqs/edit.html.erb (23.6ms)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `student_mcqs` (`created_at`, `updated_at`) VALUES ('2015-02-14 23:48:38.379689', '2015-02-14 23:48:38.379689')[0m
+  [1m[35m (45.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `student_mcqs` (`created_at`, `updated_at`) VALUES ('2015-02-14 23:48:38.427972', '2015-02-14 23:48:38.427972')
+  [1m[36m (42.5ms)[0m  [1mCOMMIT[0m
+  Rendered student_mcqs/index.html.erb (1.9ms)
+  Rendered student_mcqs/new.html.erb (0.5ms)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `student_mcqs` (`created_at`, `updated_at`) VALUES ('2015-02-14 23:48:38.494745', '2015-02-14 23:48:38.494745')[0m
+  [1m[35m (41.0ms)[0m  COMMIT
+  Rendered student_mcqs/show.html.erb (1.1ms)
+Started GET "/student_mcqs" for 127.0.0.1 at 2015-02-15 01:51:36 +0200
+Processing by StudentMcqsController#index as HTML
+  [1m[36mStudentMcq Load (0.5ms)[0m  [1mSELECT `student_mcqs`.* FROM `student_mcqs`[0m
+  Rendered student_mcqs/index.html.erb (14.1ms)
+Completed 200 OK in 40ms (Views: 23.5ms | ActiveRecord: 1.8ms)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `student_mcqs` (`created_at`, `updated_at`) VALUES ('2015-02-14 23:51:36.879427', '2015-02-14 23:51:36.879427')[0m
+  [1m[35m (76.9ms)[0m  COMMIT
+  Rendered student_mcqs/_form.html.erb (2.1ms)
+  Rendered student_mcqs/edit.html.erb (19.2ms)
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `student_mcqs` (`created_at`, `updated_at`) VALUES ('2015-02-14 23:51:36.996390', '2015-02-14 23:51:36.996390')
+  [1m[36m (36.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `student_mcqs` (`created_at`, `updated_at`) VALUES ('2015-02-14 23:51:37.037065', '2015-02-14 23:51:37.037065')[0m
+  [1m[35m (31.1ms)[0m  COMMIT
+  Rendered student_mcqs/index.html.erb (2.0ms)
+  Rendered student_mcqs/new.html.erb (0.5ms)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `student_mcqs` (`created_at`, `updated_at`) VALUES ('2015-02-14 23:51:37.096279', '2015-02-14 23:51:37.096279')
+  [1m[36m (38.9ms)[0m  [1mCOMMIT[0m
+  Rendered student_mcqs/show.html.erb (1.1ms)
+Started GET "/student_mcqs" for 127.0.0.1 at 2015-02-15 01:52:45 +0200
+Processing by StudentMcqsController#index as HTML
+  [1m[36mStudentMcq Load (0.7ms)[0m  [1mSELECT `student_mcqs`.* FROM `student_mcqs`[0m
+  Rendered student_mcqs/index.html.erb (17.1ms)
+Completed 200 OK in 44ms (Views: 25.5ms | ActiveRecord: 2.7ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (8.8ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (9.6ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.2ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.6ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.3ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.3ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.3ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.1ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.1ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.2ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.1ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.2ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.1ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.1ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.1ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.1ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.1ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.1ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.1ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.2ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.1ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.1ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.1ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.1ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.1ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.4ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.1ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.1ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.3ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.2ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.2ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m
+  [1m[35m (0.1ms)[0m  SELECT @@FOREIGN_KEY_CHECKS
+  [1m[36m (0.1ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 0[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 1
+  [1m[36m (0.1ms)[0m  [1mSELECT @@FOREIGN_KEY_CHECKS[0m
+  [1m[35m (0.1ms)[0m  SET FOREIGN_KEY_CHECKS = 0
+  [1m[36m (0.2ms)[0m  [1mSET FOREIGN_KEY_CHECKS = 1[0m

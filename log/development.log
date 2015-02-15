@@ -20848,3 +20848,732 @@ Processing by QuizzesController#show as JSON
   [1m[36mMcq Load (0.2ms)[0m  [1mSELECT `mcqs`.* FROM `mcqs` WHERE `mcqs`.`quiz_id` = 2[0m
   Rendered quizzes/quiz.json.jbuilder (2.7ms)
 Completed 200 OK in 94ms (Views: 7.4ms | ActiveRecord: 73.7ms)
+
+
+Started POST "/student_mcqs.json" for 192.168.1.43 at 2015-02-13 22:49:41 +0200
+Processing by StudentMcqsController#create as JSON
+  Parameters: {"answers"=>[0], "auth_token"=>"qAh6Pgtr-2-b6doJMPkx", "quiz_id"=>"2", "student_mcq"=>{}}
+Can't verify CSRF token authenticity
+  [1m[35mMcq Load (0.2ms)[0m  SELECT `mcqs`.* FROM `mcqs` WHERE `mcqs`.`quiz_id` = 2
+  [1m[36mStudent Load (0.9ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'qAh6Pgtr-2-b6doJMPkx'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-13 20:47:41.000000', `current_sign_in_at` = '2015-02-13 20:49:41.738423', `sign_in_count` = 84, `updated_at` = '2015-02-13 20:49:41.740934' WHERE `students`.`id` = 2[0m
+  [1m[35m (46.5ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `student_quizzes` (`student_quiz_mark`, `student_id`, `quiz_id`, `created_at`, `updated_at`) VALUES (0, 2, 2, '2015-02-13 20:49:41.793941', '2015-02-13 20:49:41.793941')
+  [1m[36m (37.5ms)[0m  [1mCOMMIT[0m
+  Rendered student_mcqs/new.json.jbuilder (0.3ms)
+Completed 201 Created in 113ms (Views: 10.9ms | ActiveRecord: 87.0ms)
+
+
+Started POST "/sessions/authorize.json" for 192.168.1.2 at 2015-02-15 00:46:11 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by SessionsController#authorize as JSON
+  Parameters: {"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.3ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  Rendered sessions/error.json.jbuilder (2.6ms)
+Completed 200 OK in 368ms (Views: 38.4ms | ActiveRecord: 5.0ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.2 at 2015-02-15 00:46:12 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.3ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.8ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-14 22:38:00.000000', `current_sign_in_at` = '2015-02-14 22:46:12.467849', `current_sign_in_ip` = '192.168.1.2', `sign_in_count` = 3, `updated_at` = '2015-02-14 22:46:12.470455' WHERE `students`.`id` = 2[0m
+  [1m[35m (49.5ms)[0m  COMMIT
+  [1m[36mQuiz Load (0.6ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published > '2015-02-14 22:41:12.577140')  ORDER BY time_to_be_published ASC LIMIT 1[0m
+  [1m[35mSubject Load (0.3ms)[0m  SELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 2
+  [1m[36mSubject Load (0.4ms)[0m  [1mSELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`id` = 1 LIMIT 1[0m
+  Rendered sessions/create.json.jbuilder (45.3ms)
+Completed 201 Created in 459ms (Views: 48.2ms | ActiveRecord: 57.9ms)
+
+
+Started DELETE "/sign_out.json?auth_token=yNKF5L6jMQ3xjxvmrjKE" for 192.168.1.2 at 2015-02-15 00:46:33 +0200
+Processing by SessionsController#destroy as JSON
+  Parameters: {"auth_token"=>"yNKF5L6jMQ3xjxvmrjKE"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.8ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'yNKF5L6jMQ3xjxvmrjKE'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-14 22:46:12.000000', `current_sign_in_at` = '2015-02-14 22:46:33.612171', `last_sign_in_ip` = '192.168.1.2', `sign_in_count` = 4, `updated_at` = '2015-02-14 22:46:33.614461' WHERE `students`.`id` = 2
+  [1m[36m (46.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mStudent Load (0.8ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'yNKF5L6jMQ3xjxvmrjKE'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36mStudent Load (0.6ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'hoFSWH5g2sPyMk1-RzWP'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE `students` SET `authentication_token` = 'hoFSWH5g2sPyMk1-RzWP', `updated_at` = '2015-02-14 22:46:33.674376' WHERE `students`.`id` = 2[0m
+  [1m[35m (42.9ms)[0m  COMMIT
+  Rendered sessions/delete.json.jbuilder (0.5ms)
+Completed 200 OK in 130ms (Views: 19.4ms | ActiveRecord: 93.6ms)
+
+
+Started POST "/sessions/authorize.json" for 192.168.1.2 at 2015-02-15 00:47:04 +0200
+Processing by SessionsController#authorize as JSON
+  Parameters: {"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.6ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.7ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com'  ORDER BY `instructors`.`id` ASC LIMIT 1[0m
+  Rendered sessions/error.json.jbuilder (0.1ms)
+Completed 200 OK in 304ms (Views: 4.2ms | ActiveRecord: 4.2ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.2 at 2015-02-15 00:47:04 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.3ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'cherifsalama@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.3ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.3ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com'  ORDER BY `instructors`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE `instructors` SET `current_sign_in_at` = '2015-02-14 22:47:05.231348', `current_sign_in_ip` = '192.168.1.2', `sign_in_count` = 2, `updated_at` = '2015-02-14 22:47:05.233522' WHERE `instructors`.`id` = 1
+  [1m[36m (54.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.6ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`instructor_id` = 1 AND (time_to_be_published > '2015-02-14 22:42:05.296041')  ORDER BY time_to_be_published ASC LIMIT 1
+  [1m[36mSubject Load (0.3ms)[0m  [1mSELECT `subjects`.* FROM `subjects` WHERE `subjects`.`instructor_id` = 1[0m
+  Rendered sessions/create.json.jbuilder (4.6ms)
+Completed 201 Created in 352ms (Views: 10.0ms | ActiveRecord: 57.1ms)
+
+
+Started POST "/sign_in" for 127.0.0.1 at 2015-02-15 00:51:33 +0200
+Processing by SessionsController#create as HTML
+  Parameters: {"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.3ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'cherifsalama@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.7ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.8ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com'  ORDER BY `instructors`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `instructors` SET `last_sign_in_at` = '2015-02-14 22:47:05.000000', `current_sign_in_at` = '2015-02-14 22:51:33.624197', `last_sign_in_ip` = '192.168.1.2', `current_sign_in_ip` = '127.0.0.1', `sign_in_count` = 3, `updated_at` = '2015-02-14 22:51:33.626412' WHERE `instructors`.`id` = 1
+  [1m[36m (56.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (1.0ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`instructor_id` = 1 AND (time_to_be_published > '2015-02-14 22:46:33.688233')  ORDER BY time_to_be_published ASC LIMIT 1
+  [1m[36mSubject Load (0.3ms)[0m  [1mSELECT `subjects`.* FROM `subjects` WHERE `subjects`.`instructor_id` = 1[0m
+  Rendered sessions/create.json.jbuilder (1.8ms)
+Completed 201 Created in 352ms (Views: 7.5ms | ActiveRecord: 61.1ms)
+
+
+Started POST "/sign_in" for 127.0.0.1 at 2015-02-15 00:51:47 +0200
+Processing by SessionsController#create as HTML
+  Parameters: {"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.2ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'cherifsalama@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.6ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.4ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com'  ORDER BY `instructors`.`id` ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE `instructors` SET `last_sign_in_at` = '2015-02-14 22:51:33.000000', `current_sign_in_at` = '2015-02-14 22:51:47.951336', `last_sign_in_ip` = '127.0.0.1', `sign_in_count` = 4, `updated_at` = '2015-02-14 22:51:47.953147' WHERE `instructors`.`id` = 1
+  [1m[36m (45.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.6ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`instructor_id` = 1 AND (time_to_be_published > '2015-02-14 22:46:48.003019')  ORDER BY time_to_be_published ASC LIMIT 1
+  [1m[36mSubject Load (0.1ms)[0m  [1mSELECT `subjects`.* FROM `subjects` WHERE `subjects`.`instructor_id` = 1[0m
+  Rendered sessions/create.json.jbuilder (1.2ms)
+Completed 201 Created in 337ms (Views: 7.3ms | ActiveRecord: 48.1ms)
+
+
+Started POST "/sign_in" for 127.0.0.1 at 2015-02-15 00:52:10 +0200
+Processing by SessionsController#create as HTML
+  Parameters: {"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]"}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.3ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'cherifsalama@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.6ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.5ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com'  ORDER BY `instructors`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE `instructors` SET `last_sign_in_at` = '2015-02-14 22:51:47.000000', `current_sign_in_at` = '2015-02-14 22:52:11.027595', `sign_in_count` = 5, `updated_at` = '2015-02-14 22:52:11.029829' WHERE `instructors`.`id` = 1
+  [1m[36m (55.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.5ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`instructor_id` = 1 AND (time_to_be_published > '2015-02-14 22:47:11.088223')  ORDER BY time_to_be_published ASC LIMIT 1
+  [1m[36mSubject Load (0.4ms)[0m  [1mSELECT `subjects`.* FROM `subjects` WHERE `subjects`.`instructor_id` = 1[0m
+  Rendered sessions/create.json.jbuilder (3.0ms)
+Completed 201 Created in 361ms (Views: 7.6ms | ActiveRecord: 58.2ms)
+
+
+Started POST "/sessions/authorize.json" for 192.168.1.2 at 2015-02-15 00:53:32 +0200
+Processing by SessionsController#authorize as JSON
+  Parameters: {"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'cherifsalama@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.9ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.8ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com'  ORDER BY `instructors`.`id` ASC LIMIT 1
+  Rendered sessions/error.json.jbuilder (0.2ms)
+Completed 200 OK in 283ms (Views: 4.4ms | ActiveRecord: 2.1ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.2 at 2015-02-15 00:53:32 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.3ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.3ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com'  ORDER BY `instructors`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE `instructors` SET `last_sign_in_at` = '2015-02-14 22:52:11.000000', `current_sign_in_at` = '2015-02-14 22:53:32.678823', `current_sign_in_ip` = '192.168.1.2', `sign_in_count` = 6, `updated_at` = '2015-02-14 22:53:32.681449' WHERE `instructors`.`id` = 1[0m
+  [1m[35m (45.3ms)[0m  COMMIT
+  [1m[36mQuiz Load (1.0ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`instructor_id` = 1 AND (time_to_be_published > '2015-02-14 22:48:32.732284')  ORDER BY time_to_be_published ASC LIMIT 1[0m
+  [1m[35mSubject Load (0.4ms)[0m  SELECT `subjects`.* FROM `subjects` WHERE `subjects`.`instructor_id` = 1
+  Rendered sessions/create.json.jbuilder (2.4ms)
+Completed 201 Created in 347ms (Views: 12.9ms | ActiveRecord: 48.7ms)
+
+
+Started GET "/quizzes/student-statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:05:47 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by QuizzesController#show as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq", "id"=>"student-statistics"}
+  [1m[35mQuiz Load (0.3ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 0 LIMIT 1
+Completed 404 Not Found in 71ms
+
+ActiveRecord::RecordNotFound (Couldn't find Quiz with 'id'=student-statistics):
+  app/controllers/quizzes_controller.rb:126:in `set_quiz'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (9.4ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (3.9ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.4ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (36.7ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:06:12 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.9ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:16:12.226915')
+  Rendered quizzes/student_statistics.json.jbuilder (13.6ms)
+Completed 200 OK in 83ms (Views: 20.2ms | ActiveRecord: 6.0ms)
+  [1m[36mStudent Load (0.8ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 1 LIMIT 1[0m
+  [1m[35mQuiz Load (0.7ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 6 LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `student_quizzes` (`student_id`, `quiz_id`, `created_at`, `updated_at`) VALUES (1, 6, '2015-02-14 23:06:42.654817', '2015-02-14 23:06:42.654817')
+  [1m[36m (44.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.8ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 1
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 1 LIMIT 1[0m
+  [1m[35mQuiz Load (0.7ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 7 LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `student_quizzes` (`student_id`, `quiz_id`, `created_at`, `updated_at`) VALUES (1, 7, '2015-02-14 23:06:45.530321', '2015-02-14 23:06:45.530321')
+  [1m[36m (45.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.8ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 1
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 1 LIMIT 1[0m
+  [1m[35mQuiz Load (0.7ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 8 LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `student_quizzes` (`student_id`, `quiz_id`, `created_at`, `updated_at`) VALUES (1, 8, '2015-02-14 23:06:46.870650', '2015-02-14 23:06:46.870650')
+  [1m[36m (41.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (1.0ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 1
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:06:49 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.5ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:16:49.600308')
+  Rendered quizzes/student_statistics.json.jbuilder (1.6ms)
+Completed 200 OK in 9ms (Views: 6.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:06:51 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.5ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:16:51.175364')
+  Rendered quizzes/student_statistics.json.jbuilder (1.2ms)
+Completed 200 OK in 11ms (Views: 5.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:06:55 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.9ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:16:55.973856')
+  Rendered quizzes/student_statistics.json.jbuilder (1.6ms)
+Completed 200 OK in 9ms (Views: 4.9ms | ActiveRecord: 1.3ms)
+  [1m[36mInstructor Load (0.5ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`id` = 1 LIMIT 1[0m
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:09:04 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.8ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:19:04.576037')
+  Rendered quizzes/student_statistics.json.jbuilder (1.9ms)
+Completed 200 OK in 11ms (Views: 6.7ms | ActiveRecord: 1.2ms)
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mQuiz Load (1.0ms)[0m  [1mSELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:19:44.718794')[0m
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mQuiz Load (0.9ms)[0m  [1mSELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2[0m
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mQuiz Load (0.4ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 6 LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO `student_quizzes` (`student_id`, `quiz_id`, `created_at`, `updated_at`) VALUES (2, 6, '2015-02-14 23:10:06.417534', '2015-02-14 23:10:06.417534')[0m
+  [1m[35m (45.9ms)[0m  COMMIT
+  [1m[36mQuiz Load (0.4ms)[0m  [1mSELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2[0m
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mQuiz Load (0.3ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 7 LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `student_quizzes` (`student_id`, `quiz_id`, `created_at`, `updated_at`) VALUES (2, 7, '2015-02-14 23:10:09.959597', '2015-02-14 23:10:09.959597')[0m
+  [1m[35m (51.7ms)[0m  COMMIT
+  [1m[36mQuiz Load (0.5ms)[0m  [1mSELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2[0m
+  [1m[35mStudent Load (0.5ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mQuiz Load (0.4ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 8 LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `student_quizzes` (`student_id`, `quiz_id`, `created_at`, `updated_at`) VALUES (2, 8, '2015-02-14 23:10:12.190405', '2015-02-14 23:10:12.190405')[0m
+  [1m[35m (54.9ms)[0m  COMMIT
+  [1m[36mQuiz Load (0.9ms)[0m  [1mSELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2[0m
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mQuiz Load (0.3ms)[0m  [1mSELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2[0m
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mQuiz Load (0.9ms)[0m  [1mSELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:20:16.697704')[0m
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:10:21 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (1.1ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:20:21.405391')
+  [1m[36mStudentQuiz Load (0.6ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.7ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.6ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  Rendered quizzes/student_statistics.json.jbuilder (48.1ms)
+Completed 200 OK in 58ms (Views: 50.7ms | ActiveRecord: 3.7ms)
+  [1m[35mQuiz Load (0.5ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 6 LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE `quizzes` SET `quiz_title` = 'quiz 6', `updated_at` = '2015-02-14 23:10:44.896845' WHERE `quizzes`.`id` = 6
+  [1m[36m (63.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.9ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 7 LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `quizzes` SET `quiz_title` = 'quiz 7', `updated_at` = '2015-02-14 23:10:51.073283' WHERE `quizzes`.`id` = 7
+  [1m[36m (45.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.8ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 8 LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE `quizzes` SET `quiz_title` = 'quiz 8', `updated_at` = '2015-02-14 23:10:57.067730' WHERE `quizzes`.`id` = 8
+  [1m[36m (54.6ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:11:03 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[35mStudent Load (0.3ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mQuiz Load (0.9ms)[0m  [1mSELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:21:03.207536')[0m
+  [1m[35mStudentQuiz Load (0.2ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.3ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1
+  Rendered quizzes/student_statistics.json.jbuilder (6.6ms)
+Completed 200 OK in 16ms (Views: 10.9ms | ActiveRecord: 2.0ms)
+  [1m[35mStudentQuiz Load (0.7ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `student_quizzes` (`student_quiz_mark`, `quiz_id`, `student_id`, `created_at`, `updated_at`) VALUES (7, 6, 2, '2015-02-14 23:12:16.551195', '2015-02-14 23:12:16.551195')
+  [1m[36m (48.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `student_quizzes` (`student_quiz_mark`, `quiz_id`, `student_id`, `created_at`, `updated_at`) VALUES (14, 7, 2, '2015-02-14 23:12:24.848504', '2015-02-14 23:12:24.848504')[0m
+  [1m[35m (52.1ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `student_quizzes` (`student_quiz_mark`, `quiz_id`, `student_id`, `created_at`, `updated_at`) VALUES (16, 8, 2, '2015-02-14 23:12:34.067186', '2015-02-14 23:12:34.067186')
+  [1m[36m (46.5ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:38 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.5ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (1.0ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:38.986473')
+  [1m[36mStudentQuiz Load (0.5ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.8ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.6ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (11.4ms)
+Completed 200 OK in 22ms (Views: 16.0ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:40 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.9ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:40.025547')
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.3ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (8.2ms)
+Completed 200 OK in 14ms (Views: 10.2ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:40 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.9ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:40.294815')
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.3ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (8.6ms)
+Completed 200 OK in 15ms (Views: 10.6ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:40 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.9ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:40.500491')
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.3ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (8.3ms)
+Completed 200 OK in 14ms (Views: 10.3ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:40 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.5ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:40.712838')
+  [1m[36mStudentQuiz Load (0.1ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.4ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.1ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (10.9ms)
+Completed 200 OK in 20ms (Views: 13.7ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:40 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.4ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:40.898654')
+  [1m[36mStudentQuiz Load (0.2ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.2ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.1ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (7.2ms)
+Completed 200 OK in 13ms (Views: 10.3ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:41 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.4ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:41.087851')
+  [1m[36mStudentQuiz Load (0.1ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.2ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.1ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (6.6ms)
+Completed 200 OK in 13ms (Views: 9.8ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:41 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.5ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.4ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:41.289011')
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.3ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (7.2ms)
+Completed 200 OK in 16ms (Views: 10.3ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:41 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (1.0ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:41.458009')
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.3ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (8.5ms)
+Completed 200 OK in 16ms (Views: 11.4ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:41 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.9ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:41.631150')
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.3ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (7.9ms)
+Completed 200 OK in 18ms (Views: 12.6ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:42 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.7ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:42.146075')
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.3ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.2ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.1ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (12.2ms)
+Completed 200 OK in 25ms (Views: 18.9ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:12:42 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.8ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:22:42.563118')
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.3ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (9.2ms)
+Completed 200 OK in 16ms (Views: 11.7ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:13:17 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.9ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:23:17.822948')
+  [1m[36mStudentQuiz Load (0.1ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.1ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.1ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (8.4ms)
+Completed 200 OK in 15ms (Views: 11.2ms | ActiveRecord: 1.6ms)
+  [1m[35mStudent Load (0.5ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mStudentQuiz Load (0.8ms)[0m  [1mSELECT `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2[0m
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:15:17 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.3ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (1.0ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:25:17.611636')
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.2ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mStudentQuiz Load (0.2ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1  [["student_id", 2], ["quiz_id", 6]]
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 7]]
+  [1m[35mCACHE (0.0ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (8.7ms)
+Completed 200 OK in 16ms (Views: 11.7ms | ActiveRecord: 2.0ms)
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mStudentQuiz Load (0.3ms)[0m  [1mSELECT `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2[0m
+  [1m[35mStudent Load (0.6ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mStudentQuiz Load (0.8ms)[0m  [1mSELECT `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7[0m
+  [1m[35mStudentQuiz Load (0.8ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`id` = 15 LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  DELETE FROM `student_quizzes` WHERE `student_quizzes`.`id` = 15
+  [1m[36m (46.5ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:19:17 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1[0m
+  [1m[35mQuiz Load (0.9ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:29:17.698818')
+  [1m[36mStudentQuiz Load (0.7ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.7ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1
+  [1m[36mCACHE (0.1ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 6]]
+  [1m[35mStudentQuiz Load (0.6ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1
+  [1m[36mCACHE (0.0ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1[0m  [["student_id", 2], ["quiz_id", 8]]
+  Rendered quizzes/student_statistics.json.jbuilder (16.8ms)
+Completed 200 OK in 23ms (Views: 18.3ms | ActiveRecord: 3.1ms)
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mStudentQuiz Load (0.7ms)[0m  [1mSELECT `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6[0m
+  [1m[35mStudentQuiz Load (0.8ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`id` = 14 LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  DELETE FROM `student_quizzes` WHERE `student_quizzes`.`id` = 14
+  [1m[36m (66.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mStudentQuiz Load (0.7ms)[0m  [1mSELECT `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8[0m
+  [1m[35mStudentQuiz Load (0.7ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`id` = 16 LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  DELETE FROM `student_quizzes` WHERE `student_quizzes`.`id` = 16
+  [1m[36m (51.6ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/quizzes/student_statistics?auth_token=8u3PxhGWrXk9ND35B_uq" for 127.0.0.1 at 2015-02-15 01:19:51 +0200
+Processing by QuizzesController#student_statistics as HTML
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[35mStudent Load (0.3ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mQuiz Load (0.6ms)[0m  [1mSELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:29:51.420547')[0m
+  [1m[35mStudentQuiz Load (0.4ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1
+  [1m[36mStudentQuiz Load (0.4ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.5ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1
+  Rendered quizzes/student_statistics.json.jbuilder (9.3ms)
+Completed 200 OK in 20ms (Views: 15.4ms | ActiveRecord: 2.2ms)
+
+
+Started POST "/sessions/authorize.json" for 192.168.1.2 at 2015-02-15 01:20:28 +0200
+Processing by SessionsController#authorize as JSON
+  Parameters: {"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.6ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.7ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com'  ORDER BY `instructors`.`id` ASC LIMIT 1[0m
+  Rendered sessions/error.json.jbuilder (0.5ms)
+Completed 200 OK in 303ms (Views: 6.7ms | ActiveRecord: 4.0ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.2 at 2015-02-15 01:20:29 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"cherifsalama@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'cherifsalama@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.3ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.3ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'cherifsalama@gmail.com'  ORDER BY `instructors`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  UPDATE `instructors` SET `last_sign_in_at` = '2015-02-14 22:53:32.000000', `current_sign_in_at` = '2015-02-14 23:20:29.464754', `last_sign_in_ip` = '192.168.1.2', `sign_in_count` = 7, `updated_at` = '2015-02-14 23:20:29.467023' WHERE `instructors`.`id` = 1
+  [1m[36m (55.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (1.0ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`instructor_id` = 1 AND (time_to_be_published > '2015-02-14 23:15:29.528895')  ORDER BY time_to_be_published ASC LIMIT 1
+  [1m[36mSubject Load (0.3ms)[0m  [1mSELECT `subjects`.* FROM `subjects` WHERE `subjects`.`instructor_id` = 1[0m
+  Rendered sessions/create.json.jbuilder (16.4ms)
+Completed 201 Created in 368ms (Views: 24.3ms | ActiveRecord: 61.0ms)
+
+
+Started GET "/quizzes/student_statistics.json?auth_token=8u3PxhGWrXk9ND35B_uq" for 192.168.1.2 at 2015-02-15 01:20:32 +0200
+Processing by QuizzesController#student_statistics as JSON
+  Parameters: {"auth_token"=>"8u3PxhGWrXk9ND35B_uq"}
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`id` = 2 LIMIT 1
+  [1m[36mQuiz Load (0.8ms)[0m  [1mSELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published < '2015-02-14 23:30:32.798228')[0m
+  [1m[35mStudentQuiz Load (0.2ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 6 LIMIT 1
+  [1m[36mStudentQuiz Load (0.1ms)[0m  [1mSELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 7 LIMIT 1[0m
+  [1m[35mStudentQuiz Load (0.1ms)[0m  SELECT  `student_quizzes`.* FROM `student_quizzes` WHERE `student_quizzes`.`student_id` = 2 AND `student_quizzes`.`quiz_id` = 8 LIMIT 1
+  Rendered quizzes/student_statistics.json.jbuilder (5.0ms)
+Completed 200 OK in 18ms (Views: 11.9ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/sessions/authorize.json" for 192.168.1.2 at 2015-02-15 05:31:22 +0200
+Processing by SessionsController#authorize as JSON
+  Parameters: {"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.7ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com' LIMIT 1[0m
+  [1m[35mInstructor Load (0.6ms)[0m  SELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36mAdmin Load (0.4ms)[0m  [1mSELECT  `admins`.* FROM `admins` WHERE `admins`.`email` = 'mohamedahmed@gmail.com' LIMIT 1[0m
+  Rendered sessions/error.json.jbuilder (0.1ms)
+Completed 200 OK in 181ms (Views: 7.9ms | ActiveRecord: 9.4ms)
+
+
+Started POST "/sessions/authorize.json" for 192.168.1.2 at 2015-02-15 05:32:15 +0200
+Processing by SessionsController#authorize as JSON
+  Parameters: {"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[35mStudent Load (0.4ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com' LIMIT 1
+  [1m[36mInstructor Load (0.3ms)[0m  [1mSELECT  `instructors`.* FROM `instructors` WHERE `instructors`.`email` = 'mohamedahmed@gmail.com' LIMIT 1[0m
+  [1m[35mAdmin Load (0.3ms)[0m  SELECT  `admins`.* FROM `admins` WHERE `admins`.`email` = 'mohamedahmed@gmail.com' LIMIT 1
+  Rendered sessions/error.json.jbuilder (0.1ms)
+Completed 200 OK in 147ms (Views: 4.0ms | ActiveRecord: 1.1ms)
+
+
+Started POST "/sessions/authorize.json" for 192.168.1.2 at 2015-02-15 05:32:34 +0200
+Processing by SessionsController#authorize as JSON
+  Parameters: {"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.4ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.8ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  Rendered sessions/error.json.jbuilder (0.1ms)
+Completed 200 OK in 281ms (Views: 4.0ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/sign_in.json" for 192.168.1.2 at 2015-02-15 05:32:35 +0200
+Processing by SessionsController#create as JSON
+  Parameters: {"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"mohamedahmed@gmail.com", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity
+  [1m[36mStudent Load (0.2ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com' LIMIT 1[0m
+  [1m[35mStudent Load (0.3ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`email` = 'mohamedahmed@gmail.com'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-14 22:46:33.000000', `current_sign_in_at` = '2015-02-15 03:32:35.457813', `sign_in_count` = 5, `updated_at` = '2015-02-15 03:32:35.460127' WHERE `students`.`id` = 2
+  [1m[36m (48.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Load (0.6ms)[0m  SELECT  `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND (time_to_be_published > '2015-02-15 03:27:35.534757')  ORDER BY time_to_be_published ASC LIMIT 1
+  [1m[36mSubject Load (0.3ms)[0m  [1mSELECT `subjects`.* FROM `subjects` INNER JOIN `students_subjects` ON `subjects`.`id` = `students_subjects`.`subject_id` WHERE `students_subjects`.`student_id` = 2[0m
+  [1m[35mSubject Load (0.4ms)[0m  SELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`id` = 1 LIMIT 1
+  Rendered sessions/create.json.jbuilder (45.5ms)
+Completed 201 Created in 412ms (Views: 45.9ms | ActiveRecord: 57.1ms)
+
+
+Started GET "/quizzes/2.json?auth_token=hoFSWH5g2sPyMk1-RzWP" for 192.168.1.2 at 2015-02-15 05:32:43 +0200
+Processing by QuizzesController#show as JSON
+  Parameters: {"auth_token"=>"hoFSWH5g2sPyMk1-RzWP", "id"=>"2"}
+  [1m[36mQuiz Load (0.6ms)[0m  [1mSELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 2 LIMIT 1[0m
+  [1m[35mStudent Load (0.5ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'hoFSWH5g2sPyMk1-RzWP'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-15 03:32:35.000000', `current_sign_in_at` = '2015-02-15 03:32:43.773849', `sign_in_count` = 6, `updated_at` = '2015-02-15 03:32:43.776134' WHERE `students`.`id` = 2
+  [1m[36m (45.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuiz Exists (0.7ms)[0m  SELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND `quizzes`.`id` = 2
+  [1m[36mMcq Load (0.7ms)[0m  [1mSELECT `mcqs`.* FROM `mcqs` WHERE `mcqs`.`quiz_id` = 2[0m
+  Rendered quizzes/quiz.json.jbuilder (31.5ms)
+Completed 200 OK in 126ms (Views: 38.8ms | ActiveRecord: 51.3ms)
+
+
+Started POST "/student_mcqs.json" for 192.168.1.2 at 2015-02-15 05:32:47 +0200
+Processing by StudentMcqsController#create as JSON
+  Parameters: {"answers"=>[1], "auth_token"=>"hoFSWH5g2sPyMk1-RzWP", "quiz_id"=>"2", "student_mcq"=>{}}
+Can't verify CSRF token authenticity
+  [1m[35mMcq Load (0.3ms)[0m  SELECT `mcqs`.* FROM `mcqs` WHERE `mcqs`.`quiz_id` = 2
+  [1m[36mStudent Load (2.3ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'hoFSWH5g2sPyMk1-RzWP'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-15 03:32:43.000000', `current_sign_in_at` = '2015-02-15 03:32:47.501135', `sign_in_count` = 7, `updated_at` = '2015-02-15 03:32:47.504609' WHERE `students`.`id` = 2[0m
+  [1m[35m (54.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `student_quizzes` (`student_quiz_mark`, `student_id`, `quiz_id`, `created_at`, `updated_at`) VALUES (2, 2, 2, '2015-02-15 03:32:47.570913', '2015-02-15 03:32:47.570913')
+  [1m[36m (45.5ms)[0m  [1mCOMMIT[0m
+  Rendered student_mcqs/new.json.jbuilder (1.0ms)
+Completed 201 Created in 149ms (Views: 11.0ms | ActiveRecord: 106.9ms)
+
+
+Started GET "/quizzes/2.json?auth_token=hoFSWH5g2sPyMk1-RzWP" for 192.168.1.2 at 2015-02-15 05:32:57 +0200
+Processing by QuizzesController#show as JSON
+  Parameters: {"auth_token"=>"hoFSWH5g2sPyMk1-RzWP", "id"=>"2"}
+  [1m[35mQuiz Load (0.5ms)[0m  SELECT  `quizzes`.* FROM `quizzes` WHERE `quizzes`.`id` = 2 LIMIT 1
+  [1m[36mStudent Load (0.9ms)[0m  [1mSELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'hoFSWH5g2sPyMk1-RzWP'  ORDER BY `students`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE `students` SET `last_sign_in_at` = '2015-02-15 03:32:47.000000', `current_sign_in_at` = '2015-02-15 03:32:57.260927', `sign_in_count` = 8, `updated_at` = '2015-02-15 03:32:57.264108' WHERE `students`.`id` = 2[0m
+  [1m[35m (61.7ms)[0m  COMMIT
+  [1m[36mQuiz Exists (1.0ms)[0m  [1mSELECT `quizzes`.* FROM `quizzes` INNER JOIN `student_quizzes` ON `quizzes`.`id` = `student_quizzes`.`quiz_id` WHERE `student_quizzes`.`student_id` = 2 AND `quizzes`.`id` = 2[0m
+  [1m[35mMcq Load (0.3ms)[0m  SELECT `mcqs`.* FROM `mcqs` WHERE `mcqs`.`quiz_id` = 2
+  Rendered quizzes/quiz.json.jbuilder (2.6ms)
+Completed 200 OK in 94ms (Views: 11.4ms | ActiveRecord: 65.0ms)
+
+
+Started POST "/student_mcqs.json" for 192.168.1.2 at 2015-02-15 05:33:18 +0200
+Processing by StudentMcqsController#create as JSON
+  Parameters: {"answers"=>[1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1], "auth_token"=>"hoFSWH5g2sPyMk1-RzWP", "quiz_id"=>"2", "student_mcq"=>{}}
+Can't verify CSRF token authenticity
+  [1m[36mMcq Load (0.4ms)[0m  [1mSELECT `mcqs`.* FROM `mcqs` WHERE `mcqs`.`quiz_id` = 2[0m
+  [1m[35mStudent Load (0.8ms)[0m  SELECT  `students`.* FROM `students` WHERE `students`.`authentication_token` = 'hoFSWH5g2sPyMk1-RzWP'  ORDER BY `students`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.5ms)[0m  UPDATE `students` SET `last_sign_in_at` = '2015-02-15 03:32:57.000000', `current_sign_in_at` = '2015-02-15 03:33:18.663353', `sign_in_count` = 9, `updated_at` = '2015-02-15 03:33:18.665468' WHERE `students`.`id` = 2
+  [1m[36m (44.2ms)[0m  [1mCOMMIT[0m
+Completed 500 Internal Server Error in 57ms
+
+NoMethodError (undefined method `id' for nil:NilClass):
+  app/controllers/student_mcqs_controller.rb:34:in `block in create'
+  app/controllers/student_mcqs_controller.rb:31:in `each_index'
+  app/controllers/student_mcqs_controller.rb:31:in `create'
+
+
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_source.erb (8.7ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_trace.html.erb (3.6ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (2.1ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.3ms)
+  Rendered /home/mido/.rvm/gems/ruby-2.2.0/gems/web-console-2.0.0/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (35.9ms)

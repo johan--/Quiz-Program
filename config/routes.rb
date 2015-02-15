@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     delete "/sign_out" => "sessions#destroy"
   end
   
+  get 'quizzes/quiz_statistics'
+
   post 'sessions/authorize'
 
   get 'quizzes/prev_quizzes'

@@ -5,7 +5,7 @@ class QuizzesController < ApplicationController
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_student!, only: [:index]
   before_action :authenticate_student_or_instructor! , only: [:prev_quizzes,:show]
- # before_action :authenticate_instructor! , only: :student_statistics
+  before_action :authenticate_instructor! , only: [:student_statistics,:quiz_statistics]
   # GET /quizzes
   # GET /quizzes.json
   def prev_quizzes
@@ -21,12 +21,32 @@ class QuizzesController < ApplicationController
   end
 
   def student_statistics
-   #student = Student.find_by_seat_number(params[:seat_number])
-   student = Student.find(2)
+   student = Student.find_by_seat_number(params[:seat_number])
     render :template=>"quizzes/student_statistics.json.jbuilder",
     locals:{quizzes: student.quizzes.previous_quizzes , student: student}, 
       :success => true, :status=> :ok, :formats => [:json]
   end
+
+  def quiz_statistics
+      
+      @quizzes1=StudentQuiz.where(quiz_id: params["quiz_id"])
+      @total_students=@quizzes1.count
+      @full_mark=Quiz.find_by(id: params["quiz_id"]).quiz_mark
+
+      @A_students = @quizzes1.where("student_quiz_mark > ?", 0.85*@full_mark ).count
+      @B_students = @quizzes1.where("student_quiz_mark > :l AND student_quiz_mark < :h",{l: 0.75*@full_mark, h: 0.85*@full_mark}).count
+      @C_students = @quizzes1.where("student_quiz_mark > :l AND student_quiz_mark < :h",{l: 0.65*@full_mark, h: 0.75*@full_mark}).count
+      @D_students = @quizzes1.where("student_quiz_mark > :l AND student_quiz_mark < :h",{l: 0.50*@full_mark, h: 0.65*@full_mark}).count
+      @F_students = @total_students - @A_students - @B_students - @C_students - @D_students
+
+      @stats = {a: @A_students, b: @b_students, c: @C_students , d: @D_students, e: @F_students}
+
+      respond_to do |format|
+        format.json {render json: @stats , status: :ok , success: true }
+      end
+
+  end
+
 
   def index
     @quizzes = Quiz.all

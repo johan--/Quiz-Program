@@ -4,7 +4,7 @@ class Subject < ActiveRecord::Base
 
 	has_many :quizzes
 	has_and_belongs_to_many :students
-    belongs_to :instructors
+    belongs_to :instructor
 
 
     # validate :subject_is_present_and_allowed   	

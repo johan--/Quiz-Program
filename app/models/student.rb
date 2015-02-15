@@ -32,18 +32,18 @@ class Student < ActiveRecord::Base
 	# 			:presence => true,
 	# 			:inclusion => {:in => ["primary", "first", "second", "third", "fourth" ]}
 
-	# validates :expected_year_of_graduation, 
-	# 			:presence => true,
-	# 			:length => {:is => 4},
-	# 			:numericality => {:only_integer => true}
+	validates :expected_year_of_graduation, 
+				:presence => true,
+				:length => {:is => 4},
+				:numericality => {:only_integer => true}
 
-	# validates :gender, 
-	# 			:presence => true,
-	# 		    :inclusion => {:in => ["male", "female"]}
+	validates :gender, 
+				:presence => true,
+			    :inclusion => {:in => ["male", "female"]}
 
-	# validates :seat_number,
-	# 			:presence => true,
-	# 			:numericality => {:only_integer => true}
+	validates :seat_number,
+				:presence => true,
+				:numericality => {:only_integer => true}
 
 	# validates :name,
 	# 			:presence => true,
